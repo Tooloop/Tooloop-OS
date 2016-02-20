@@ -35,16 +35,4 @@ So for now, follow the [manual steps](https://github.com/vollstock/Tooloop-OS/wi
 
 The project is in an early state. I'm still researching and defining all components and how the overall system should work. What features I would want from it and could use in the future.
 
-
-## Roadmap
-
-**0.9**  
-Make the system ready
-
-**1.0**  
-Create a Simple-CDD package and a default ISO
-
-Get Graphics card installation (including hardware accelerated video)
-
-**2.0**  
-Tooloop OS Config Daemon and Tooloop Net Manager
+Please check the [roadmap](https://github.com/vollstock/Tooloop-OS/wiki/roadmap) for future development.
