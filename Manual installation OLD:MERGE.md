@@ -1,4 +1,4 @@
-# Merg this to the other file
+# Merge this to the other file
 
 **Compton**
 
@@ -39,16 +39,3 @@ Add this line
 
     #[[ $fgconsole 2>/dev/null) == 1 ]] && exec startx -- vtl &> /dev/null
     startx
-
-
-**Configure Openbox**
-
-| File           | Path                          |
-|:---------------|:------------------------------|
-| Config file    | `~/.config/openbox/rc.xml`    |
-| Menu file      | `~/.config/openbox/menu.xml`  |
-| Autostart file | `~/.config/openbox/autostart` |
-| Theme          | `~/.themes/Tooloop-OS/*`      |
-| Icons          | `~/.config/icons/*`           |
-
-For easier access use the gui tools: `obconf` and `obmenu`.

@@ -1,6 +1,6 @@
 # Tooloop OS
 
-Tooloop OS is a minimal, installation of [Debian](https://www.debian.org/), customized to fit the needs of public multimedia installations.
+Tooloop OS is a minimal installation of [Debian](https://www.debian.org/), customized to fit the needs of public multimedia installations.
 
 Tooloop OS is for media artists. It is supposed to provide a platform that is stable and easy to maintain even for those with little experience. Focus on your art!
 
