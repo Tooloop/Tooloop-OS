@@ -28,7 +28,7 @@ All features on top of the base system are carefully chosen and configured to re
 
 The goal is to provide ISOs ready for you to install. In the early stage of this project however, focus is still on selection of the right packages and smart configuration.
 
-So for now, follow the steps in “[Manual installation.md](Manual installation.md)”.
+So for now, follow the [manual steps](https://github.com/vollstock/Tooloop-OS/wiki/Manual-installation).
 
 
 ## Status
@@ -48,57 +48,3 @@ Get Graphics card installation (including hardware accelerated video)
 
 **2.0**  
 Tooloop OS Config Daemon and Tooloop Net Manager
-
-
-## Configuration utilities
-
-### Tooloop OS Config Tool
-
-Software/Daemon on each Tooloop Box/OS to configure the player and system.
-
-- Lightweight web server ([Mongoose?](https://github.com/cesanta/mongoose))
-- Web interface for direct control of the unit
-- Looks like an OSD
-- Network API to be controlled by a Tooloop Management Server
-- System configuration
-  - Change root password
-  - Network seetings
-  - VNC
-  - SSH
-  - Media distribution (asset sync, rsync)
-  - Avahi
-  - Shutdown, reset
-  - Choose autostart programs (and open box config)
-- Control Plug-ins
-  - ATI CCC
-  - Nvidia settings
-  - Tooloop Player
-      - Playback control
-      - Playlists
-      - Boy groups
-      - Log files (proof of play)
-      - Configuration
-
-
-
-### Tooloop Management Server
-
-Software on a standard, lightweight LAMP server to configure multiple Tooloop Player using its’ network API.
-
-- Webinterface
-- Auto discovery of players in the network
-- Media distribution to groups of Boxes (rsync? Bittorrent?)
-- Playback control of groups (OSC API)
-- Configuration single players (see above)
-- WoL, shutdown reset
-
-
-## Future Ideas
-
-- Clever mounting of internal and external drive (external SATA or CFAST)
-- Watchdog for the application
-- Check this guide for some different methods (especially security)
-- make an Installer using [Simple-CDD](Simple-CDD).
-- Avahi?
-- Check whether we can use stuff from Steam OS. E.g. Xcompmgr
-- Kernal flags? SSD optimization? (check the [PC Engine dudes](https://github.com/ssinyagin/pcengines-apu-debian-cd))
