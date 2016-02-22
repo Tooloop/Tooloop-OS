@@ -1,10 +1,44 @@
-ntp
-firmware-realtek
-firmware-brcm80211
-firmware-atheros
-firmware-ralink
-wireless-tools
-wpasupplicant
-iw
-hdparm
-smartmontools
+# Packages that will automatically be installed
+
+
+# SSH client and server
+ssh
+
+# so the default user can use some su commands (e.g. shutdown)
+sudo
+
+# X
+xorg
+
+# Some X tools so we can do configuration (e.g. power management)
+x11-xserver-utils
+
+# Window manager
+openbox
+
+# Openbox tools
+obmenu
+obconf
+
+# Compositing manager
+compton
+
+# To set the desktop color
+hsetroot
+
+# Remote control or confidence monitoring
+x11vnc
+
+# Linux audio system
+pulseaudio
+
+# Hide the mouse cursor
+unclutter
+
+# So you can check out your git repository
+git
+
+# Some tools to compile stuff (e.g. graphics driver)
+unzip
+make
+gcc
