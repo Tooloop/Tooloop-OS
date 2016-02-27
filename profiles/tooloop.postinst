@@ -39,19 +39,26 @@ augtool<<EOF
 setm /files/etc/apt/sources.list/*/ component "main contrib non-free"
 EOF
 
+# Copy custom config files
+unzip -d /tmp/tooloop-files /media/cdrom/simple-cdd/tooloop-files.zip
+
+
 # Copy Bash config
-# cp -R <PATH_TO_FILES_ON_ISO>/bash-config/* /home/tooloop
+cp -R /tmp/tooloop-files/bash-config/bashrc /home/tooloop/.bashrc
 chown tooloop:tooloop /home/tooloop/.bashrc
 
 # Copy Openbox theme
-# cp -R <PATH_TO_FILES_ON_ISO>/openbox-theme/* /usr/share/themes
+cp -R /tmp/tooloop-files/openbox-theme/* /usr/share/themes/
 
 # Copy Openbox config
-# cp -R <PATH_TO_FILES_ON_ISO>/openbox-config/* /home/tooloop/.config/openbox
+cp -R /tmp/tooloop-files/openbox-config/* /home/tooloop/.config/openbox/
 chown -R tooloop:tooloop /home/tooloop/.config/openbox/
 
 # Copy Openbox menu icons
-# cp -R <PATH_TO_FILES_ON_ISO>/openbox-menu-icons/* /home/tooloop/.config/icons
+cp -R /tmp/tooloop-files/openbox-menu-icons/* /home/tooloop/.config/icons/
 
 # Copy start-presentation script
-# cp <PATH_TO_FILES_ON_ISO>/start-presentation.sh /home/tooloop
+cp /tmp/tooloop-files/start-presentation.sh /home/tooloop/
+
+# Clean up
+rm -fr /tmp/tooloop-files
