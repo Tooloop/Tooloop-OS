@@ -1,20 +1,18 @@
 #!/bin/sh
-
 # This script will be run at the end of the installation process
-# add in /etc/default/grub
-    # Silent boot
-    # GRUB_DEFAULT=0
-    # GRUB_TIMEOUT=0
-    # GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
-    # GRUB_CMDLINE_LINUX_DEFAULT="quiet"
-    # GRUB_CMDLINE_LINUX="console=tty12"
 
-# update-grub2
 
+# Add tooloop to sudo group
+adduser tooloop sudo
+
+# Allow shutdown commands for everyone
+cat /etc/sudoers.d/tooloop-shutdown <<EOF
+tooloop     ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+EOF
 
 # Auto login
 mkdir /etc/systemd/system/getty\@tty1.service.d
-cat >/etc/systemd/system/getty\@tty1.service.d/autologin.conf <<'EOF'
+cat /etc/systemd/system/getty\@tty1.service.d/autologin.conf <<'EOF'
 [Service]
 ExecStart=
 ExecStart=/sbin/agetty --autologin "tooloop" %I
@@ -24,17 +22,36 @@ EOF
 # Make the assets partition readable for the tooloop user
 chown tooloop:tooloop /assets/
 
+# Silent boot
+augtool<<EOF
+set /files/ets/default/grub/GRUB_DEFAULT 0
+set /files/ets/default/grub/GRUB_TIMEOUT 0
+set /files/ets/default/grub/GRUB_DISTRIBUTOR "lsb_release -i -s 2> /dev/null || echo Debian"
+set /files/ets/default/grub/GRUB_CMDLINE_LINUX_DEFAULT quiet
+set /files/ets/default/grub/GRUB_CMDLINE_LINUX "console=tty12"
+save
+EOF
 
-# Allow shutdown commands for everyone
-# add in /etc/sudoers
-    # tooloop     ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+update-grub2
 
+# Enable non-free and contrib packages**
+augtool<<EOF
+setm /files/etc/apt/sources.list/*/ component "main contrib non-free"
+EOF
 
-# Make every GUI tool appear on display 0, even from SSH export DISPLAY=:0
-# add in .bash_profile
-    #[[ $fgconsole 2>/dev/null) == 1 ]] && exec startx -- vtl &> /dev/null
+# Copy Bash config
+# cp -R <PATH_TO_FILES_ON_ISO>/bash-config/* /home/tooloop
+chown tooloop:tooloop /home/tooloop/.bashrc
 
+# Copy Openbox theme
+# cp -R <PATH_TO_FILES_ON_ISO>/openbox-theme/* /usr/share/themes
 
-# Auto start Openbox
-# add in .bash_profile
-    # startx
+# Copy Openbox config
+# cp -R <PATH_TO_FILES_ON_ISO>/openbox-config/* /home/tooloop/.config/openbox
+chown -R tooloop:tooloop /home/tooloop/.config/openbox/
+
+# Copy Openbox menu icons
+# cp -R <PATH_TO_FILES_ON_ISO>/openbox-menu-icons/* /home/tooloop/.config/icons
+
+# Copy start-presentation script
+# cp <PATH_TO_FILES_ON_ISO>/start-presentation.sh /home/tooloop

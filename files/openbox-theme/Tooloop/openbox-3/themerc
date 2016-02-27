@@ -1,27 +1,22 @@
-#============================================================
-#
-#
-# Tooloop
-#
-#                                                                                
-#============================================================
-
 #======================================
 #     Menu Settings	
 #======================================
-menu.border.width: 0
-menu.border.color: #000000
-menu.title.bg: flat
-menu.title.bg.color: #707070
-menu.title.text.color: #E6007E
+
+menu.title.bg: flat solid
+menu.title.bg.color: #282828
+menu.title.text.color: #ffffff
+
 menu.separator.color: #404040
-menu.items.bg: flat
+
+menu.items.bg: flat solid
 menu.items.bg.color: #282828
-menu.items.text.color: #C6C6C6
-menu.items.disabled.text.color: #707070
-menu.items.active.bg: flat
-menu.items.active.bg.color: #E6007E
-menu.items.active.bg.border.color: #a3195b
+menu.items.text.color: #ffffff
+
+menu.items.disabled.text.color: #404040
+
+menu.items.active.bg: flat solid
+menu.items.active.bg.color: #e60050
+#menu.items.active.bg.border.color: #c3314f
 menu.items.active.text.color: #ffffff
 
 
@@ -29,30 +24,32 @@ menu.items.active.text.color: #ffffff
 #     Focused Window Settings
 #======================================
 
-window.active.title.bg: flat
+window.active.title.bg: flat solid
 window.active.title.bg.color: #282828
 window.active.handle.bg: flat
 window.active.handle.bg.color: #282828
 window.active.grip.bg: parentrelative
 window.active.label.bg: parentrelative
-window.active.label.text.color: #ECECEC
+window.active.label.text.color: #ffffff
 window.*.button.*.bg: parentrelative
-window.active.button.*.image.color: #707070
-window.active.button.*.pressed.image.color: #C6C6C6
-window.active.button.disabled.image.color: #404040
+window.active.button.*.image.color: #ffffff
+window.active.button.*.pressed.image.color: #000000
+window.active.button.disabled.image.color: #ffffff
+
 
 #======================================
 #     Unfocused Window Settings
 #======================================
 
 window.inactive.title.bg: flat
-window.inactive.title.bg.color: #707070
+window.inactive.title.bg.color: #181818
 window.inactive.handle.bg: flat
-window.inactive.handle.bg.color: #707070
+window.inactive.handle.bg.color: #181818
 window.inactive.grip.bg: parentrelative
 window.inactive.label.bg: parentrelative
-window.inactive.label.text.color: #505050
-window.inactive.button.*.image.color: #505050
+window.inactive.label.text.color: #282828
+window.inactive.button.*.image.color: #ffffff
+
 
 #======================================
 #     Global Width Settings
@@ -63,19 +60,20 @@ padding.height: 5
 border.width: 1
 window.handle.width: 3
 window.client.padding.width: 0
-menu.overlap.x: -1
+menu.overlap.x: -5
 
 #======================================
 #     Miscellaneous Settings
 #======================================
 
-border.color: #282828
+border.color: #181818
+menu.border.color: #000000
 
 #======================================
 #     Osd		
 #======================================
 
-osd.hilight.bg: flat
+osd.hilight.bg: flat border
 osd.hilight.bg.color: #7f1e31
 osd.hilight.bg.border.color: #c3314f
 

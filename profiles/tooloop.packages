@@ -23,9 +23,6 @@ obconf
 # Compositing manager
 compton
 
-# To set the desktop color
-hsetroot
-
 # Remote control or confidence monitoring
 x11vnc
 
@@ -42,3 +39,8 @@ git
 unzip
 make
 gcc
+
+# Augeas for config file manipulation
+augeas-doc
+augeas-lenses
+augeas-tools

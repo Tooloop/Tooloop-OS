@@ -1,0 +1,20 @@
+# Set black background
+xsetroot -solid "#000000" &
+
+# Turn screen saver off
+xset s 0 &
+xset s blank &
+xset s off &
+
+# Disable DPMS (Energy Star) features
+xset dpms 0 0 0 &
+xset -dpms &
+
+# Disable bell
+xset b off &
+
+# Start VNC server
+#x11vnc -shared -forever &
+
+# Start your presentation
+sh /home/tooloop/start-presentation.sh &

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
+	<menu id="root-menu" label="Openbox 3">
+		<item label="Start presentation" icon="/home/tooloop/.config/icons/menu_icon_start_presentation.png">
+			<action name="Execute">
+				<execute>sh /home/tooloop/start-presentation.sh</execute>
+			</action>
+		</item>
+		<!-- This requires the presence of the 'menu' package to work -->
+		<separator/>
+		<item label="Settings" icon="/home/tooloop/.config/icons/menu_icon_settings.png">
+			<action name="Execute">
+				<execute>/opt/tooloop-seetings/tooloop-settings-gui</execute>
+			</action>
+		</item>
+		<item label="Reboot" icon="/home/tooloop/.config/icons/menu_icon_reboot.png">
+			<action name="Execute">
+				<execute>sudo reboot</execute>
+			</action>
+		</item>
+		<item label="Power off" icon="/home/tooloop/.config/icons/menu_icon_power_off.png">
+			<action name="Execute">
+				<execute>sudo poweroff</execute>
+			</action>
+		</item>
+	</menu>
+</openbox_menu>
