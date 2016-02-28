@@ -6,13 +6,13 @@
 adduser tooloop sudo
 
 # Allow shutdown commands for everyone
-cat /etc/sudoers.d/tooloop-shutdown <<EOF
+cat >/etc/sudoers.d/tooloop-shutdown <<EOF
 tooloop     ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
 EOF
 
 # Auto login
 mkdir /etc/systemd/system/getty\@tty1.service.d
-cat /etc/systemd/system/getty\@tty1.service.d/autologin.conf <<'EOF'
+cat >/etc/systemd/system/getty\@tty1.service.d/autologin.conf <<EOF
 [Service]
 ExecStart=
 ExecStart=/sbin/agetty --autologin "tooloop" %I
@@ -24,24 +24,22 @@ chown tooloop:tooloop /assets/
 
 # Silent boot
 augtool<<EOF
-set /files/ets/default/grub/GRUB_DEFAULT 0
-set /files/ets/default/grub/GRUB_TIMEOUT 0
-set /files/ets/default/grub/GRUB_DISTRIBUTOR "lsb_release -i -s 2> /dev/null || echo Debian"
-set /files/ets/default/grub/GRUB_CMDLINE_LINUX_DEFAULT quiet
-set /files/ets/default/grub/GRUB_CMDLINE_LINUX "console=tty12"
+set /files/etc/default/grub/GRUB_DEFAULT 0
+set /files/etc/default/grub/GRUB_TIMEOUT 0
+set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT quiet
+set /files/etc/default/grub/GRUB_CMDLINE_LINUX "console=tty12"
 save
 EOF
 
 update-grub2
 
-# Enable non-free and contrib packages**
+# Enable non-free and contrib packages
 augtool<<EOF
 setm /files/etc/apt/sources.list/*/ component "main contrib non-free"
 EOF
 
-# Copy custom config files
-unzip -d /tmp/tooloop-files /media/cdrom/simple-cdd/tooloop-files.zip
-
+# Unzip config files
+unzip /tmp/tooloop-files.zip -d /tmp/tooloop-files
 
 # Copy Bash config
 cp -R /tmp/tooloop-files/bash-config/bashrc /home/tooloop/.bashrc
@@ -51,14 +49,20 @@ chown tooloop:tooloop /home/tooloop/.bashrc
 cp -R /tmp/tooloop-files/openbox-theme/* /usr/share/themes/
 
 # Copy Openbox config
+mkdir /home/tooloop/.config
+mkdir /home/tooloop/.config/openbox
 cp -R /tmp/tooloop-files/openbox-config/* /home/tooloop/.config/openbox/
-chown -R tooloop:tooloop /home/tooloop/.config/openbox/
 
 # Copy Openbox menu icons
+mkdir /home/tooloop/.config/icons
 cp -R /tmp/tooloop-files/openbox-menu-icons/* /home/tooloop/.config/icons/
 
 # Copy start-presentation script
 cp /tmp/tooloop-files/start-presentation.sh /home/tooloop/
 
+# Chown everything in /home/tooloop to the tooloop user
+chown -R tooloop:tooloop /home/tooloop
+
 # Clean up
+rm /tmp/tooloop-files.zip
 rm -fr /tmp/tooloop-files
