@@ -1,12 +1,5 @@
 # Packages that will automatically be installed
 
-
-# SSH client and server
-ssh
-
-# so the default user can use some su commands (e.g. shutdown)
-sudo
-
 # X
 xorg
 
@@ -23,6 +16,9 @@ obconf
 # Compositing manager
 compton
 
+# SSH client and server
+ssh
+
 # Remote control or confidence monitoring
 x11vnc
 
@@ -32,10 +28,9 @@ pulseaudio
 # Hide the mouse cursor
 unclutter
 
-# So you can check out your git repository
+# Some tools
 git
-
-# Some tools to compile stuff (e.g. graphics driver)
+sudo
 unzip
 make
 gcc

@@ -113,10 +113,22 @@ if ! shopt -oq posix; then
 fi
 
 
-# tooloop stuff
+# Tooloop stuff
 
 # Make every GUI tool appear on display 0, even from SSH
 export DISPLAY=:0
 
 # Auto start openbox
 startx
+
+# Tooloop aliases
+alias tooloop-presentation-start='sh /home/tooloop/start-presentation.sh'
+alias tooloop-presentation-stop='sh /home/tooloop/stop-presentation.sh'
+alias tooloop-presentation-reset='sh /home/tooloop/stop-presentation.sh && sh /home/tooloop/start-presentation.sh'
+alias tooloop-display-off='xset dpms force off'
+alias tooloop-display-standby='xset dpms force standby'
+alias tooloop-display-on='xset dpms force on && xset -dpms'
+alias tooloop-display-blink='xsetroot -solid grey50 && sleep 0.1 && xsetroot -solid black && sleep 0.1 && xsetroot -solid grey50 && sleep 0.1 && xsetroot -solid black && sleep 0.1'
+alias tooloop-settings=''
+alias tooloop-vnc-on='x11vnc -shared -forever &'
+alias tooloop-vnc-off='kill $(pidof x11vnc)'

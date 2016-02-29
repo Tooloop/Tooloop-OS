@@ -57,8 +57,9 @@ cp -R /tmp/tooloop-files/openbox-config/* /home/tooloop/.config/openbox/
 mkdir /home/tooloop/.config/icons
 cp -R /tmp/tooloop-files/openbox-menu-icons/* /home/tooloop/.config/icons/
 
-# Copy start-presentation script
+# Copy start- and stop-presentation scripts
 cp /tmp/tooloop-files/start-presentation.sh /home/tooloop/
+cp /tmp/tooloop-files/stop-presentation.sh /home/tooloop/
 
 # Chown everything in /home/tooloop to the tooloop user
 chown -R tooloop:tooloop /home/tooloop
