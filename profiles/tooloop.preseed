@@ -176,8 +176,10 @@ d-i partman-auto/method string regular
 # contains an old LVM configuration, the user will normally receive a
 # warning. This can be preseeded away...
 d-i partman-lvm/device_remove_lvm boolean true
+
 # The same applies to pre-existing software RAID array:
 d-i partman-md/device_remove_md boolean true
+
 # And the same goes for the confirmation to write the lvm partitions.
 d-i partman-lvm/confirm boolean true
 d-i partman-lvm/confirm_nooverwrite boolean true
@@ -197,23 +199,23 @@ d-i partman-lvm/confirm_nooverwrite boolean true
 # (logical) line. This example creates a small /boot partition, suitable
 # swap, and uses the rest of the space for the root partition:
 
-#  #1  primary  10.0 GB  ext4  /
+#  #1  primary   4.0 GB  ext4  /
 #  #5  logical   8.0 GB  swap  swap
-#  #6  logical  20.0 GB  ext4  /home
+#  #6  logical   4.0 GB  ext4  /home
 #  #6  logical     * GB  ext4  /assets
 
 d-i partman-auto/expert_recipe string                         \
       boot-root ::                                            \
-              5000 10000 10000 ext4                           \
+              4000 4000 4000 ext4                             \
                       $primary{ } $bootable{ }                \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
                       mountpoint{ / }                         \
               .                                               \
-              4000 200% 300% linux-swap                       \
+              200% 200% 200% linux-swap                       \
                       method{ swap } format{ }                \
               .                                               \
-              10000 20000 20000 ext4                          \
+              4000 4000 4000 ext4                             \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
                       mountpoint{ /home }                     \
@@ -221,7 +223,7 @@ d-i partman-auto/expert_recipe string                         \
               10000 1000000000 1000000000 ext4                \
                       method{ format } format{ }              \
                       use_filesystem{ } filesystem{ ext4 }    \
-                      mountpoint{ /home }                     \
+                      mountpoint{ /assets }                   \
               .
 
 # The full recipe format is documented in the file partman-auto-recipe.txt
@@ -292,6 +294,7 @@ d-i partman/confirm_nooverwrite boolean true
 # use traditional device names, or "label" to try filesystem labels before
 # falling back to UUIDs.
 #d-i partman/mount_style select uuid
+
 
 ### Base system installation
 # Configure APT to not install recommended packages by default. Use of this
