@@ -122,9 +122,9 @@ export DISPLAY=:0
 startx
 
 # Tooloop aliases
-alias tooloop-presentation-start='sh /home/tooloop/start-presentation.sh'
-alias tooloop-presentation-stop='sh /home/tooloop/stop-presentation.sh'
-alias tooloop-presentation-reset='sh /home/tooloop/stop-presentation.sh && sh /home/tooloop/start-presentation.sh'
+alias tooloop-presentation-start='sh /assets/presentation/start-presentation.sh'
+alias tooloop-presentation-stop='sh /assets/presentation/stop-presentation.sh'
+alias tooloop-presentation-reset='sh /assets/presentation/stop-presentation.sh && sh /assets/presentation/start-presentation.sh'
 alias tooloop-display-off='xset dpms force off'
 alias tooloop-display-standby='xset dpms force standby'
 alias tooloop-display-on='xset dpms force on && xset -dpms'
@@ -132,3 +132,5 @@ alias tooloop-display-blink='xsetroot -solid "#e60050" && sleep 0.1 && xsetroot 
 alias tooloop-settings=''
 alias tooloop-vnc-on='x11vnc -shared -forever &'
 alias tooloop-vnc-off='kill $(pidof x11vnc)'
+alias tooloop-screenshot='scrot --silent "/assets/screenshots/$(date --rfc-3339=seconds).png"'
+alias tooloop-screenshot-select='scrot --silent --select --border "/assets/screenshots/$(date --rfc-3339=seconds).png"'

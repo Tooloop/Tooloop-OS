@@ -202,7 +202,7 @@ d-i partman-lvm/confirm_nooverwrite boolean true
 #  #1  primary   4.0 GB  ext4  /
 #  #5  logical   8.0 GB  swap  swap
 #  #6  logical   4.0 GB  ext4  /home
-#  #6  logical     * GB  ext4  /assets
+#  #7  logical     * GB  ext4  /assets
 
 d-i partman-auto/expert_recipe string                         \
       boot-root ::                                            \

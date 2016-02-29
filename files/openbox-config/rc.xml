@@ -157,15 +157,15 @@
   </margins>
   <keyboard>
     <!-- Keybindings for windows -->
-    <keybind key="A-F4">
+    <keybind key="W-w">
       <action name="Close"/>
     </keybind>
-    <keybind key="A-Escape">
+    <keybind key="W-Escape">
       <action name="Lower"/>
       <action name="FocusToBottom"/>
       <action name="Unfocus"/>
     </keybind>
-    <keybind key="A-space">
+    <keybind key="W-space">
       <action name="ShowMenu">
         <menu>client-menu</menu>
       </action>
@@ -217,6 +217,16 @@
           <name>Clock</name>
         </startupnotify>
         <command>xclock -digital -strftime "%H:%M:%S" -update 1 -padding 20 -foreground "#e60050" -background black</command>
+      </action>
+    </keybind>
+    <keybind key="W-S-3">
+      <action name="Execute">
+        <command>tooloop-screenshot</command>
+      </action>
+    </keybind>
+    <keybind key="W-S-4">
+      <action name="Execute">
+        <command>tooloop-screenshot-select</command>
       </action>
     </keybind>
   </keyboard>

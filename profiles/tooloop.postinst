@@ -21,6 +21,9 @@ EOF
 
 # Make the assets partition readable for the tooloop user
 chown tooloop:tooloop /assets/
+mkdir /assets/presentation
+mkdir /assets/data
+mkdir /assets/screenshots
 
 # Silent boot
 augtool<<EOF
@@ -58,8 +61,8 @@ mkdir /home/tooloop/.config/icons
 cp -R /tmp/tooloop-files/openbox-menu-icons/* /home/tooloop/.config/icons/
 
 # Copy start- and stop-presentation scripts
-cp /tmp/tooloop-files/start-presentation.sh /home/tooloop/
-cp /tmp/tooloop-files/stop-presentation.sh /home/tooloop/
+cp /tmp/tooloop-files/start-presentation.sh /assets/presentation/
+cp /tmp/tooloop-files/stop-presentation.sh /assets/presentation/
 
 # Chown everything in /home/tooloop to the tooloop user
 chown -R tooloop:tooloop /home/tooloop
