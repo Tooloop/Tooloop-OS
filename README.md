@@ -12,7 +12,7 @@
 **Lightweight**  
 *Tooloop OS* boots to your running application in seconds and all the power of your machine is used to display your application and for nothing else.  
 
-- Very low memory footprint
+- Very low memory footprint (> 80 Mb)
 - No unnecessary system services
 - Only bare minimum of [installed packages](https://github.com/vollstock/Tooloop-OS/wiki/overview)
 
@@ -67,6 +67,6 @@ Please check the [roadmap](https://github.com/vollstock/Tooloop-OS/wiki/roadmap)
 
 # Installation
 
-If you're brave or curious, and want to check it out, please follow the [manual steps](https://github.com/vollstock/Tooloop-OS/wiki/Manual-installation).  
+If you're brave or curious, and want to check it out, please follow the [manual steps](https://github.com/vollstock/Tooloop-OS/wiki/Manual-installation) or [build your own ISO](https://github.com/vollstock/Tooloop-OS/wiki/Buildding-an-ISO).
 
 Even installing manually, you can get your *Tooloop Box* up and running in about 30 minutes (if you're quick in the terminal ;-)).
