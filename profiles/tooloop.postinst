@@ -20,10 +20,10 @@ EOF
 
 
 # Make the assets partition readable for the tooloop user
-chown tooloop:tooloop /assets/
 mkdir /assets/presentation
 mkdir /assets/data
 mkdir /assets/screenshots
+chown -R tooloop:tooloop /assets/
 
 # Silent boot
 augtool<<EOF
