@@ -17,4 +17,4 @@ xset b off &
 #x11vnc -shared -forever &
 
 # Start your presentation
-sh /home/tooloop/start-presentation.sh &
+tooloop-presentation-start
