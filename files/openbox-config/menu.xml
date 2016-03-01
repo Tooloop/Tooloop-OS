@@ -3,7 +3,7 @@
 	<menu id="root-menu" label="Openbox 3">
 		<item label="Start presentation" icon="/home/tooloop/.config/icons/menu_icon_start_presentation.png">
 			<action name="Execute">
-				<execute>tooloop-presentation-start</execute>
+				<execute>sh /assets/presentation/start-presentation.sh</execute>
 			</action>
 		</item>
 		<!-- This requires the presence of the 'menu' package to work -->
