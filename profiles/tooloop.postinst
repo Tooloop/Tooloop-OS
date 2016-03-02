@@ -23,7 +23,6 @@ EOF
 mkdir /assets/presentation
 mkdir /assets/data
 mkdir /assets/screenshots
-chown -R tooloop:tooloop /assets/
 
 # Silent boot
 augtool<<EOF
@@ -64,8 +63,9 @@ cp -R /tmp/tooloop-files/openbox-menu-icons/* /home/tooloop/.config/icons/
 cp /tmp/tooloop-files/start-presentation.sh /assets/presentation/
 cp /tmp/tooloop-files/stop-presentation.sh /assets/presentation/
 
-# Chown everything in /home/tooloop to the tooloop user
-chown -R tooloop:tooloop /home/tooloop
+# Chown things to the tooloop user
+chown -R tooloop:tooloop /assets/
+chown -R tooloop:tooloop /home/tooloop/
 
 # Clean up
 rm /tmp/tooloop-files.zip
