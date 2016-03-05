@@ -3,7 +3,7 @@
 #======================================
 
 menu.title.bg: flat solid
-menu.title.bg.color: #282828
+menu.title.bg.color: #a2185b
 menu.title.text.color: #ffffff
 
 menu.separator.color: #404040
@@ -47,7 +47,7 @@ window.inactive.handle.bg: flat
 window.inactive.handle.bg.color: #181818
 window.inactive.grip.bg: parentrelative
 window.inactive.label.bg: parentrelative
-window.inactive.label.text.color: #282828
+window.inactive.label.text.color: #404040
 window.inactive.button.*.image.color: #ffffff
 
 
@@ -75,7 +75,7 @@ menu.border.color: #000000
 #======================================
 
 osd.hilight.bg: flat border
-osd.hilight.bg.color: #7f1e31
+osd.hilight.bg.color: #ff0000
 osd.hilight.bg.border.color: #c3314f
 
 #======================================
