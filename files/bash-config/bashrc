@@ -119,7 +119,11 @@ fi
 export DISPLAY=:0
 
 # Auto start openbox
-startx
+# only from the linux term (not from xterm or SSH)
+if [ $TERM = "linux" ]
+then
+  startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1
+fi
 
 # Tooloop aliases
 alias tooloop-presentation-start='sh /assets/presentation/start-presentation.sh'

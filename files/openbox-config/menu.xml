@@ -15,12 +15,12 @@
 		</item>
 		<item label="Reboot" icon="/home/tooloop/.config/icons/menu_icon_reboot.png">
 			<action name="Execute">
-				<execute>sudo reboot</execute>
+				<execute>sudo reboot --no-wall</execute>
 			</action>
 		</item>
 		<item label="Power off" icon="/home/tooloop/.config/icons/menu_icon_power_off.png">
 			<action name="Execute">
-				<execute>sudo poweroff</execute>
+				<execute>sudo poweroff --no-wall</execute>
 			</action>
 		</item>
 	</menu>

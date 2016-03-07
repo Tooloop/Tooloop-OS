@@ -15,7 +15,7 @@ mkdir /etc/systemd/system/getty\@tty1.service.d
 cat >/etc/systemd/system/getty\@tty1.service.d/autologin.conf <<EOF
 [Service]
 ExecStart=
-ExecStart=/sbin/agetty --autologin "tooloop" %I
+ExecStart=/sbin/agetty --skip-login --noissue --autologin "tooloop" %I
 EOF
 
 
@@ -28,12 +28,19 @@ mkdir /assets/screenshots
 augtool<<EOF
 set /files/etc/default/grub/GRUB_DEFAULT 0
 set /files/etc/default/grub/GRUB_TIMEOUT 0
-set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT quiet
 set /files/etc/default/grub/GRUB_CMDLINE_LINUX "console=tty12"
+set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT "quiet loglevel=3 vga=current"
 save
 EOF
 
 update-grub2
+
+# Clear the Debian warranty message
+rm /etc/motd
+
+# Get rid of the last login message
+touch /home/tooloop/.hushlogin
+chown tooloop:tooloop /home/tooloop/.hushlogin
 
 # Enable non-free and contrib packages
 augtool<<EOF
