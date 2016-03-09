@@ -5,7 +5,7 @@
 # Add tooloop to sudo group
 adduser tooloop sudo
 
-# Allow shutdown commands for everyone
+# Allow shutdown commands without password
 cat >/etc/sudoers.d/tooloop-shutdown <<EOF
 tooloop     ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
 EOF
@@ -18,7 +18,6 @@ ExecStart=
 ExecStart=/sbin/agetty --skip-login --noissue --autologin "tooloop" %I
 EOF
 
-
 # Make the assets partition readable for the tooloop user
 mkdir /assets/presentation
 mkdir /assets/data
@@ -28,26 +27,66 @@ mkdir /assets/screenshots
 augtool<<EOF
 set /files/etc/default/grub/GRUB_DEFAULT 0
 set /files/etc/default/grub/GRUB_TIMEOUT 0
-set /files/etc/default/grub/GRUB_CMDLINE_LINUX "console=tty12"
-set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT "quiet loglevel=3 vga=current"
+set /files/etc/default/grub/GRUB_CMDLINE_LINUX \""console=tty12\""
+set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT \""quiet loglevel=3 vga=current rd.systemd.show_status=false rd.udev.log-priority=3\""
 save
 EOF
 
 update-grub2
 
-# Clear the Debian warranty message
-rm /etc/motd
+
+# Change SSH port for security
+augtool<<EOF
+set /files/etc/ssh/sshd_config/Port 10022
+save
+EOF
+
+
+# Nice SSH banner
+augtool<<EOF
+set /files/etc/ssh/sshd_config/Banner /etc/issue.net
+save
+EOF
+
+cat >/etc/issue.net <<EOF
+
+
+
+
+     |                         |
+   --|--     _____     _____   |       _____     _____     _____
+     |      /     \   /     \  |      /     \   /     \   /     \
+     |     |       | |       | |     |       | |       | |       |
+     |     |       | |       | |     |       | |       | |       |
+      \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
+                                                         |
+                  Tooloop OS 0.9  |  Debian GNU/Linux 8  |
+
+
+Hint: There's a bunch of convenient aliases starting with tooloop-...
+E.g. tooloop-presentation-stop, tooloop-settings
+
+-------------------------------------------------------------------------
+
+EOF
 
 # Get rid of the last login message
 touch /home/tooloop/.hushlogin
 chown tooloop:tooloop /home/tooloop/.hushlogin
+
+# Hide verbose kernel messages
+cat >/etc/sysctl.d/20-quiet-printk.conf <<EOF
+kernel.printk = 3 3 3 3
+EOF
+
 
 # Enable non-free and contrib packages
 augtool<<EOF
 setm /files/etc/apt/sources.list/*/ component "main contrib non-free"
 EOF
 
-# Unzip config files
+
+# Unzip additional files
 unzip /tmp/tooloop-files.zip -d /tmp/tooloop-files
 
 # Copy Bash config
