@@ -13,6 +13,9 @@ openbox
 obmenu
 obconf
 
+# Lightweight browser (e.g. for settings)
+xombrero
+
 # Compositing manager
 compton
 

@@ -18,7 +18,7 @@
 
 
 **Stable**  
-Debian Linux is known for its stability and it’s used all over the world as a power workhorse. It’s the solid foundation that you can trust. [Others](http://store.steampowered.com/steamos/) [do](http://www.ubuntu.com), too.
+Debian Linux is known for its stability and it’s used all over the world as a power workhorse. It’s the solid foundation that you can trust. [Others](http://store.steampowered.com/steamos/) do, [too](http://www.ubuntu.com).
 
 
 **Easy to manage**  

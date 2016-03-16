@@ -1,0 +1,87 @@
+<!--#include file="header.shtml" -->
+<body class="services">
+
+  <!--#include file="sidebar.shtml" -->
+
+  <div id="settings-panel" class="has-button-bar">
+
+    <table class="settings-table">
+
+      <tr><td colspan="2"><h2>Network Services</h2></td></tr>
+
+      <tr>
+        <td class="label-column">VNC server</td>
+        <td class="value-column">
+          <div>
+            <input type="checkbox" id="vnc-switch" name="vnc-switch" class="switch" data-checked="<!--#call vnc_enabled-->"/>
+            <label for="vnc-switch">on / off</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-column">SSH server</td>
+        <td class="value-column">
+          <div>
+            <input type="checkbox" id="ssh-switch" name="ssh-switch" class="switch" data-checked="<!--#call ssh_enabled-->"/>
+            <label for="ssh-switch">on / off</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-column">Auto network recognition</td>
+        <td class="value-column">
+          <div>
+            <input type="checkbox" id="avahi-switch" name="avahi-switch" class="switch" data-checked="<!--#call avahi_enabled-->"/>
+            <label for="avahi-switch">on / off</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-column">Remote configuration</td>
+        <td class="value-^column">
+          <div>
+            <input type="checkbox" id="settings-server-switch" name="settings-server-switch" class="switch" data-checked="<!--#call settings_server_enabled-->"/>
+            <label for="settings-server-switch">on / off</label>
+            <span class="hint">Reach the settings from the network</span>
+          </div>
+        </td>
+      </tr>
+
+      <tr><td colspan="2"><h2>Tools</h2></td></tr>
+      <tr>
+        <td class="label-column top">Screenshots</td>
+        <td class="value-column">
+          <div>
+            <input type="checkbox" id="screenshots-switch" name="screenshots-switch" class="switch" data-checked="<!--#call screenshots_enabled-->"/>
+            <label for="screenshots-switch">on / off</label><br/>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div id="button-bar">
+    <button>Save</button>
+  </div>
+
+</body>
+
+<!--#include file="footer-scripts.shtml" -->
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+  // Map server values to checkbox states
+  $("input:checkbox").each( function() {
+    if( $(this).data('checked') ) {
+      $(this).prop('checked', true);
+    }
+  });
+
+});
+
+</script>
+
+<!--#include file="footer.shtml" -->

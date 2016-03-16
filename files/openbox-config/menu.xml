@@ -1,27 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
-	<menu id="root-menu" label="Openbox 3">
-		<item label="Start presentation" icon="/home/tooloop/.config/icons/menu_icon_start_presentation.png">
-			<action name="Execute">
-				<execute>sh /assets/presentation/start-presentation.sh</execute>
-			</action>
-		</item>
-		<!-- This requires the presence of the 'menu' package to work -->
-		<separator/>
-		<item label="Settings" icon="/home/tooloop/.config/icons/menu_icon_settings.png">
-			<action name="Execute">
-				<execute>/opt/tooloop-seetings/tooloop-settings-gui</execute>
-			</action>
-		</item>
-		<item label="Reboot" icon="/home/tooloop/.config/icons/menu_icon_reboot.png">
-			<action name="Execute">
-				<execute>sudo reboot --no-wall</execute>
-			</action>
-		</item>
-		<item label="Power off" icon="/home/tooloop/.config/icons/menu_icon_power_off.png">
-			<action name="Execute">
-				<execute>sudo poweroff --no-wall</execute>
-			</action>
-		</item>
-	</menu>
+        <menu id="root-menu" label="Openbox 3">
+                <item icon="/home/tooloop/.config/icons/menu_icon_start_presentation.png" label="Start presentation">
+                        <action name="Execute">
+                                <execute>sh /assets/presentation/start-presentation.sh</execute>
+                        </action>
+                </item>
+                <!-- This requires the presence of the 'menu' package to work -->
+                <separator/>
+                <item label="Settings">
+                        <action name="Execute">
+                                <execute>xombrero -ST localhost:8000</execute>
+                        </action>
+                </item>
+                <menu id="tools-menu" label="Tools" icon="/home/tooloop/.config/icons/menu_icon_tools.png">
+                        <item label="Clock">
+                                <action name="Execute">
+                                        <execute>xclock -digital -strftime &quot;%H:%M:%S&quot; -update 1 -padding 20 -foreground &quot;#e60050&quot; -background black</execute>
+                                </action>
+                        </item>
+                        <item label="Terminal">
+                                <action name="Execute">
+                                        <execute>xterm -background grey7</execute>
+                                </action>
+                        </item>
+                        <item label="Browser">
+                                <action name="Execute">
+                                        <execute>xombrero</execute>
+                                </action>
+                        </item>
+                </menu>
+                <separator/>
+                <item icon="/home/tooloop/.config/icons/menu_icon_reboot.png" label="Reboot">
+                        <action name="Execute">
+                                <execute>sudo reboot --no-wall</execute>
+                        </action>
+                </item>
+                <item icon="/home/tooloop/.config/icons/menu_icon_power_off.png" label="Power off">
+                        <action name="Execute">
+                                <execute>sudo poweroff --no-wall</execute>
+                        </action>
+                </item>
+        </menu>
 </openbox_menu>

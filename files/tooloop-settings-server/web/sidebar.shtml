@@ -1,0 +1,9 @@
+<div id="sidebar">
+  <ul>
+      <li><a href="index.shtml" class="dashboard">Dashboard</a></li>
+      <li><a href="presentation.shtml" class="presentation">Presentation</a></li>
+      <li><a href="network.shtml" class="network">Network</a></li>
+      <li><a href="services.shtml" class="services">Services</a></li>
+      <li><a href="system.shtml" class="system">System</a></li>
+  </ul>
+</div>

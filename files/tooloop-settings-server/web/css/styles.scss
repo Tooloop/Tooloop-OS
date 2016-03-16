@@ -1,0 +1,331 @@
+// cd ownCloud/Tooloop/Tooloop\ Settings\ Server/web/css/
+// sass styles.scss styles.css --style compressed
+
+// Sizes
+$app-width: 800px;
+$sidebar-width: 14em;
+$button-bar-height: 4em;
+
+// Colors
+$pink: #e60050;
+$purple: #a2185b;
+$background-color: #e6e6e6;
+$sidebar-background: white;
+$gray1: #181818;
+$gray2: #282828;
+$gray3: #404040;
+$gray4: #999;
+$gray5: #ddd;
+
+
+html, body {
+  font-family: ClearSans-Light, 'Clear Sans Light Regular', 'Clear Sans Light', sans-serif;
+  font-weight: lighter;
+  font-size: 18px;
+  margin: 0; padding: 0;
+  width:100%;
+  height:100%;
+  position:relative;
+  background-color: $gray1;
+}
+/* Disable certain interactions on touch devices */
+body {
+  -webkit-touch-callout: none;
+  -webkit-highlight: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.gray {
+  color: $gray3;
+  font-size: 0.8em;
+}
+
+.hint {
+  color: $gray3;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+/* ---------------------- */
+/* Sidebar */
+/* ---------------------- */
+
+#sidebar {
+  left: 0; top: 0;
+  width: $sidebar-width;
+  height: calc(100% - 1.5em);
+  padding: 1.5em 0 0 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: $sidebar-background;
+  z-index: 3;
+}
+
+#sidebar ul {
+  list-style: none;
+  margin: 0; padding: 0;
+}
+
+#sidebar a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: .75em .5em .75em 2em;
+  cursor: default;
+}
+
+body.dashboard #sidebar a.dashboard,
+body.network #sidebar a.network,
+body.services #sidebar a.services,
+body.system #sidebar a.system,
+body.presentation #sidebar a.presentation {
+  color: white;
+  background-color: $pink;
+}
+
+#sidebar a:hover {
+  color: white;
+  background-color: $purple;
+}
+
+/* ---------------------- */
+/* Settings panel */
+/* ---------------------- */
+
+#settings-panel {
+  position: absolute;
+  left: $sidebar-width; top: 0;
+  padding: 1em 2em 2em 2em;
+  width: calc(100% - #{$sidebar-width} - 4em);
+  height:calc(100% - 3em);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: $background-color;
+}
+
+.has-button-bar {
+  height:calc(100% - 3em - #{$button-bar-height}) !important;
+}
+
+#button-bar {
+  position: absolute;
+  left: $sidebar-width; bottom: 0;
+  width: calc(100% - #{$sidebar-width} - 4em);
+  height: calc(#{$button-bar-height} - 2em);
+  // border-top: 1px solid $gray4;
+  z-index: 2;
+  // margin: 0 2em;
+  padding: 1em 2em;
+  text-align: right;
+  box-shadow: 2px -1px 4px rgba(0,0,0,0.5);
+  background-color: $background-color;
+}
+
+
+/* ---------------------- */
+/* Table */
+/* ---------------------- */
+.settings-table {
+  width: 100%;
+}
+.settings-table td {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+// no padding for nested tables
+.settings-table table td {
+  padding: 0;
+}
+
+.label-column {
+  color: #666;
+  text-align: right;
+  padding-right: 1.5em;
+  width: 20%;
+}
+
+.top {
+    vertical-align: top;
+}
+
+.value-column {
+  vertical-align: middle;
+}
+
+.settings-table h1 {
+  font-size: 1.5em;
+  font-weight: lighter;
+  line-height: 1em;
+  margin: 0; padding: 0;
+}
+
+.settings-table h2 {
+  font-size: 1em;
+  margin: 0;
+  color: $gray3;
+  border-bottom: 1px solid $gray4;
+  font-weight: bold;
+}
+
+
+.settings-table label {
+  font-size: 0.75em;
+}
+/* ---------------------- */
+/* Widgets */
+/* ---------------------- */
+
+// text input
+input[type=text],
+input[type=password],
+input[type=number],
+textarea {
+  font-family: monospace;
+  font-size: 0.8em;
+  border: 1px solid $gray4;
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 2px;
+}
+
+textarea {
+  width: calc(100% - 1em);
+  height:10em;
+}
+
+// button
+button {
+  position: relative;
+  font-size: 0.8em;
+  border-radius: 2px;
+  border: none;
+  padding: 0.5em 2em;
+  background-color: $purple;
+  color: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  margin: 0 0 0.5em 0;
+}
+
+button:active {
+  box-shadow: none;
+  top: 1px;
+  color: $gray5;
+}
+
+label {
+    color: $gray3;
+}
+
+input[type=text] ~ label,
+input[type=number] ~ label {
+  margin-left: 0.3em;
+  margin-right: 1.2em;
+}
+
+// switch
+input.switch:empty {
+  display: none;
+}
+input.switch:empty ~ label {
+	position: relative;
+	float: left;
+	line-height: 1.6em;
+	text-indent: 4.5em;
+	margin: 0.2em 0;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input.switch:empty ~ label:before,
+input.switch:empty ~ label:after
+{
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: ' ';
+	width: calc(3.5em + 1px);
+	background-color: $gray5;
+	-webkit-transition: all 100ms ease-out;
+	transition: all 100ms ease-out;
+  border-radius: 3px;
+}
+
+
+input.switch:empty ~ label:after
+{
+	width: 1.5em;
+	top: 1px;
+	bottom: 1px;
+	margin-left: 2em;
+	background-color: #fff;
+	border-radius: 2px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+input.switch:checked ~ label:before
+{
+	background-color: $pink;
+}
+
+input.switch:checked ~ label:after
+{
+  margin-left: 1px;
+}
+
+// progress
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+
+  background-color: white;
+  height: 0.5em;
+  // width: 50%;
+  position: relative;
+  bottom: 0.15em;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) inset;
+}
+progress[value]::-moz-progress-bar {
+  background-color: rgb(0,196,255);
+}
+
+progress[value]::-webkit-progress-value {
+    border-radius: 2px;
+    background-color: rgb(0,196,255);
+}
+
+// graphs
+.graph {
+  border: 0px solid #ccc;
+  width: calc(50% - 2em);
+  // min-width: 240px;
+  height:150px;
+  float: left;
+  margin: 2em 2em 0 0;
+  font-size: 0.8em;
+}
+
+.flot-text {
+}
+
+@media (max-width: 800px) {
+  .graph {
+    float: none;
+    width: 100%;
+  }
+}

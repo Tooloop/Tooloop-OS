@@ -22,6 +22,7 @@ EOF
 mkdir /assets/presentation
 mkdir /assets/data
 mkdir /assets/screenshots
+mkdir /assets/logs
 
 # Silent boot
 augtool<<EOF
@@ -112,6 +113,11 @@ cp /tmp/tooloop-files/stop-presentation.sh /assets/presentation/
 # Copy Clear Sans font
 cp -R /tmp/tooloop-files/clearsans /usr/share/fonts/truetype
 
+# Copy settings Server
+mkdir /opt/tooloop-settings
+cp /tmp/tooloop-files/tooloop-settings-server/tooloop-settings-server /opt/tooloop-settings/
+cp -R /tmp/tooloop-files/tooloop-settings-server/web /opt/tooloop-settings/
+
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
 chown -R tooloop:tooloop /home/tooloop/
@@ -119,3 +125,24 @@ chown -R tooloop:tooloop /home/tooloop/
 # Clean up
 rm /tmp/tooloop-files.zip
 rm -fr /tmp/tooloop-files
+
+
+# Create a systemd service for settings server
+mkdir /usr/lib/systemd/system/
+cat > /usr/lib/systemd/system/tooloop-settings-server.service <<EOF
+[Unit]
+Description=Tooloop settings server
+
+[Service]
+ExecStart=/opt/tooloop-settings/tooloop-settings-server
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Enable the service
+systemctl enable tooloop-settings-server
+
+#Start the service
+systemctl start tooloop-settings-server

@@ -1,0 +1,115 @@
+<!--#include file="header.shtml" -->
+<body class="presentation">
+
+  <!--#include file="sidebar.shtml" -->
+
+  <div id="settings-panel" class="has-button-bar">
+
+    <table class="settings-table">
+
+      <tr><td colspan="2"><h2>App setup</h2></td></tr>
+
+      <tr>
+        <td class="label-column top">Start script</td>
+        <td class="value-column">
+          <textarea><!--#call start_script--></textarea>
+          <button style="margin-top: 0.5em;">Run</button>
+        </td>
+    </tr>
+    <tr>
+      <td class="label-column top">Stop script</td>
+      <td class="value-column">
+        <textarea><!--#call stop_script--></textarea>
+        <button style="margin-top: 0.5em;">Run</button>
+      </td>
+  </tr>
+
+  <tr><td colspan="2"><h2>Appearance</h2></td></tr>
+
+  <tr>
+    <td class="label-column">Window name</td>
+    <td class="value-column">
+      <input type="text" id="window-name" name="window-name" value="<!--#call window_name-->"/>
+      <span class="hint">use obxprop to find out</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="label-column">Fullscreen</td>
+    <td class="value-column">
+      <div>
+        <input type="checkbox" id="fullscreen-switch" name="fullscreen-switch" class="switch" data-checked="<!--#call fullscreen-->"/>
+        <label for="fullscreen-switch">yes / no</label>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="label-column">Always on top</td>
+    <td class="value-column">
+      <div>
+        <input type="checkbox" id="always-on-top-switch" name="always-on-top-switch" class="switch" data-checked="<!--#call always_on_top-->"/>
+        <label for="always-on-top-switch">yes / no</label>
+      </div>
+    </td>
+  </tr>
+</tr>
+<tr>
+  <td class="label-column">Display window decoration</td>
+  <td class="value-column">
+    <div>
+      <input type="checkbox" id="decoration-switch" name="decoration-switch" class="switch" data-checked="<!--#call display_decoration-->"/>
+      <label for="decoration-switch">yes / no</label>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td class="label-column">Size</td>
+  <td class="value-column">
+    <input type="text" value="<!--#call width-->" style="width: 5em;" id="size-w" name="size-w"/>
+    <label for="size-w">w</label>
+
+    <input type="text" value="<!--#call height-->" style="width: 5em;" id="sizw-h" name="sizw-h"/>
+    <label for="sizw-h">h</label>
+
+    <span class="hint">E.g. 50% or 200px</span>
+  </td>
+</tr>
+</tr>
+<tr>
+  <td class="label-column">Position</td>
+  <td class="value-column">
+    <input type="number" value="<!--#call x-->" style="width: 5em;" id="position-x" name="position-x"/>
+    <label for="position-x">x</label>
+
+    <input type="number" value="<!--#call y-->" style="width: 5em;" id="position-y" name="position-y"/>
+    <label for="position-y">y</label>
+  </td>
+</tr>
+
+</table>
+
+</div>
+
+<div id="button-bar">
+  <button>Save</button>
+</div>
+
+</body>
+
+<!--#include file="footer-scripts.shtml" -->
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+  // Map server values to checkbox states
+  $("input:checkbox").each( function() {
+    if( $(this).data('checked') ) {
+      $(this).prop('checked', true);
+    }
+  });
+
+});
+
+</script>
+
+<!--#include file="footer.shtml" -->
