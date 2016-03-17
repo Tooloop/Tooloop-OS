@@ -8,23 +8,23 @@
                 </item>
                 <!-- This requires the presence of the 'menu' package to work -->
                 <separator/>
-                <item label="Settings">
+                <item label="Settings" icon="/home/tooloop/.config/icons/menu_icon_settings.png">
                         <action name="Execute">
                                 <execute>xombrero -ST localhost:8000</execute>
                         </action>
                 </item>
                 <menu id="tools-menu" label="Tools" icon="/home/tooloop/.config/icons/menu_icon_tools.png">
-                        <item label="Clock">
+                        <item label="Clock" icon="/home/tooloop/.config/icons/menu_icon_clock.png">
                                 <action name="Execute">
                                         <execute>xclock -digital -strftime &quot;%H:%M:%S&quot; -update 1 -padding 20 -foreground &quot;#e60050&quot; -background black</execute>
                                 </action>
                         </item>
-                        <item label="Terminal">
+                        <item label="Terminal" icon="/home/tooloop/.config/icons/menu_icon_terminal.png">
                                 <action name="Execute">
                                         <execute>xterm -background grey7</execute>
                                 </action>
                         </item>
-                        <item label="Browser">
+                        <item label="Browser" icon="/home/tooloop/.config/icons/menu_icon_browser.png">
                                 <action name="Execute">
                                         <execute>xombrero</execute>
                                 </action>
