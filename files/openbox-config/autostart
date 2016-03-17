@@ -16,5 +16,8 @@ xset b off &
 # Start VNC server
 #x11vnc -shared -forever &
 
+# Cleanup screenshots at reboot (there's also a cronjob at 00:01)
+sh /opt/tooloop/scripts/clean-screenshots.sh &
+
 # Start your presentation
 sh /assets/presentation/start-presentation.sh &

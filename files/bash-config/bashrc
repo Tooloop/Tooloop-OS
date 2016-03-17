@@ -136,5 +136,4 @@ alias tooloop-display-blink='xsetroot -solid "#e60050" && sleep 0.1 && xsetroot 
 alias tooloop-settings='xombrero -ST localhost:8000 &'
 alias tooloop-vnc-on='x11vnc -shared -forever &'
 alias tooloop-vnc-off='kill $(pidof x11vnc)'
-alias tooloop-screenshot='scrot --silent "/assets/screenshots/$(date --rfc-3339=seconds).png"'
-alias tooloop-screenshot-select='scrot --silent --select --border "/assets/screenshots/$(date --rfc-3339=seconds).png"'
+alias tooloop-screenshot='sh /opt/tooloop/scripts/screenshot.sh'

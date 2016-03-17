@@ -219,14 +219,18 @@
         <command>xclock -digital -strftime "%H:%M:%S" -update 1 -padding 20 -foreground "#e60050" -background black</command>
       </action>
     </keybind>
-    <keybind key="W-S-3">
+    <keybind key="W-s">
       <action name="Execute">
-        <command>tooloop-screenshot</command>
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Settings</name>
+        </startupnotify>
+        <command>xombrero -ST localhost:8000</command>
       </action>
     </keybind>
-    <keybind key="W-S-4">
+    <keybind key="W-S-3">
       <action name="Execute">
-        <command>tooloop-screenshot-select</command>
+        <command>sh /opt/tooloop/scripts/screenshot.sh</command>
       </action>
     </keybind>
   </keyboard>

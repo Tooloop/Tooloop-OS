@@ -113,19 +113,14 @@ cp /tmp/tooloop-files/stop-presentation.sh /assets/presentation/
 # Copy Clear Sans font
 cp -R /tmp/tooloop-files/clearsans /usr/share/fonts/truetype
 
+# Copy scripts
+mkdir /opt/tooloop
+cp /tmp/tooloop-files/scripts/ /opt/tooloop
+
 # Copy settings Server
-mkdir /opt/tooloop-settings
-cp /tmp/tooloop-files/tooloop-settings-server/tooloop-settings-server /opt/tooloop-settings/
-cp -R /tmp/tooloop-files/tooloop-settings-server/web /opt/tooloop-settings/
-
-# Chown things to the tooloop user
-chown -R tooloop:tooloop /assets/
-chown -R tooloop:tooloop /home/tooloop/
-
-# Clean up
-rm /tmp/tooloop-files.zip
-rm -fr /tmp/tooloop-files
-
+mkdir /opt/tooloop/settings-server
+cp /tmp/tooloop-files/tooloop-settings-server/tooloop-settings-server /opt/tooloop/settings-server/
+cp -R /tmp/tooloop-files/tooloop-settings-server/web /opt/tooloop/settings-server/
 
 # Create a systemd service for settings server
 mkdir /usr/lib/systemd/system/
@@ -134,7 +129,7 @@ cat > /usr/lib/systemd/system/tooloop-settings-server.service <<EOF
 Description=Tooloop settings server
 
 [Service]
-ExecStart=/opt/tooloop-settings/tooloop-settings-server
+ExecStart=/opt/tooloop/settings-server/tooloop-settings-server
 Restart=always
 
 [Install]
@@ -144,5 +139,19 @@ EOF
 # Enable the service
 systemctl enable tooloop-settings-server
 
-#Start the service
+# Start the service
 systemctl start tooloop-settings-server
+
+# Create cronjob to clean up screenshots every day at 00:01
+crontab -u tooloop -l | { cat; echo "1 0 * * * /opt/tooloop/scripts/clean-screenshots.sh"; } | crontab -
+
+# ------------------------------------------------------------------------------
+# finish
+
+# Chown things to the tooloop user
+chown -R tooloop:tooloop /assets/
+chown -R tooloop:tooloop /home/tooloop/
+
+# Clean up /tmp
+rm /tmp/tooloop-files.zip
+rm -fr /tmp/tooloop-files
