@@ -56,7 +56,7 @@ cat >/etc/issue.net <<EOF
 
      |                         |
    --|--     _____     _____   |       _____     _____     _____
-     |      /     \   /     \  |      /     \   /     \   /     \
+     |      /     \   /     \  |      /     \   /     \   /     \\
      |     |       | |       | |     |       | |       | |       |
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
@@ -79,13 +79,6 @@ chown tooloop:tooloop /home/tooloop/.hushlogin
 cat >/etc/sysctl.d/20-quiet-printk.conf <<EOF
 kernel.printk = 3 3 3 3
 EOF
-
-
-# Enable non-free and contrib packages
-augtool<<EOF
-setm /files/etc/apt/sources.list/*/ component "main contrib non-free"
-EOF
-
 
 # Unzip additional files
 unzip /tmp/tooloop-files.zip -d /tmp/tooloop-files
@@ -115,7 +108,7 @@ cp -R /tmp/tooloop-files/clearsans /usr/share/fonts/truetype
 
 # Copy scripts
 mkdir /opt/tooloop
-cp /tmp/tooloop-files/scripts/ /opt/tooloop
+cp -R /tmp/tooloop-files/scripts /opt/tooloop
 
 # Copy settings Server
 mkdir /opt/tooloop/settings-server
