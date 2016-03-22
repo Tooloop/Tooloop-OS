@@ -136,7 +136,7 @@ systemctl enable tooloop-settings-server
 systemctl start tooloop-settings-server
 
 # Create cronjob to clean up screenshots every day at 00:01
-crontab -u tooloop -l | { cat; echo "1 0 * * * /opt/tooloop/scripts/clean-screenshots.sh"; } | crontab -
+crontab -u tooloop -l | { cat; echo "sh 1 0 * * * /opt/tooloop/scripts/clean-screenshots.sh"; } | crontab -
 
 # ------------------------------------------------------------------------------
 # finish
