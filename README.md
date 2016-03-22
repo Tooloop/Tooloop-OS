@@ -1,5 +1,8 @@
 # Tooloop OS
 
+![](https://img.shields.io/badge/status-pre--release-red.svg)
+![](https://img.shields.io/github/license/vollstock/tooloop-os.svg)
+
 ![](https://github.com/vollstock/Tooloop-OS/wiki/images/tooloop-header.jpg)
 
 *Tooloop OS* is a minimal installation of [Debian Linux](https://www.debian.org/), customized to fit the needs of public multimedia installations.
