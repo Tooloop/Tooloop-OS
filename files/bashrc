@@ -117,6 +117,7 @@ fi
 
 # Make every GUI tool appear on display 0, even from SSH
 export DISPLAY=:0
+export XAUTHORITY=~/.Xauthority
 
 # Auto start openbox
 # only from the linux term (not from xterm or SSH)
@@ -132,8 +133,8 @@ alias tooloop-presentation-reset='sh /assets/presentation/stop-presentation.sh &
 alias tooloop-display-off='xset dpms force off'
 alias tooloop-display-standby='xset dpms force standby'
 alias tooloop-display-on='xset dpms force on && xset -dpms'
-alias tooloop-display-blink='xsetroot -solid "#e60050" && sleep 0.1 && xsetroot -solid black && sleep 0.1 && xsetroot -solid "#e60050" && sleep 0.1 && xsetroot -solid black && xsetroot -solid "#e60050" && sleep 0.1 && xsetroot -solid black'
-alias tooloop-settings='xombrero -ST localhost:8000 &'
+alias tooloop-display-blink='xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black && sleep 0.15 && xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black && sleep 0.15 && xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black && sleep 0.15 && xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black'
+alias tooloop-settings='firefox localhost &'
 alias tooloop-vnc-on='x11vnc -shared -forever &'
 alias tooloop-vnc-off='kill $(pidof x11vnc)'
-alias tooloop-screenshot='sh /opt/tooloop/scripts/screenshot.sh'
+alias tooloop-screenshot='/opt/tooloop/scripts/screenshot.sh'

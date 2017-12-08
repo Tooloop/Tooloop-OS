@@ -225,12 +225,12 @@
           <enabled>true</enabled>
           <name>Settings</name>
         </startupnotify>
-        <command>xombrero -ST localhost:8000</command>
+        <command>firefoy localhost</command>
       </action>
     </keybind>
     <keybind key="W-S-3">
       <action name="Execute">
-        <command>sh /opt/tooloop/scripts/screenshot.sh</command>
+        <command>/opt/tooloop/scripts/screenshot.sh</command>
       </action>
     </keybind>
   </keyboard>

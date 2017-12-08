@@ -10,10 +10,15 @@
                 <separator/>
                 <item label="Settings" icon="/home/tooloop/.config/icons/menu_icon_settings.png">
                         <action name="Execute">
-                                <execute>xombrero -ST localhost:8000</execute>
+                                <execute>firefox localhost</execute>
                         </action>
                 </item>
                 <menu id="tools-menu" label="Tools" icon="/home/tooloop/.config/icons/menu_icon_tools.png">
+                        <item label="Audio Volume" icon="/home/tooloop/.config/icons/menu_icon_volume.png">
+                                <action name="Execute">
+                                        <execute>pavucontrol</execute>
+                                </action>
+                        </item>
                         <item label="Clock" icon="/home/tooloop/.config/icons/menu_icon_clock.png">
                                 <action name="Execute">
                                         <execute>xclock -digital -strftime &quot;%H:%M:%S&quot; -update 1 -padding 20 -foreground &quot;#e60050&quot; -background black</execute>
@@ -26,7 +31,7 @@
                         </item>
                         <item label="Browser" icon="/home/tooloop/.config/icons/menu_icon_browser.png">
                                 <action name="Execute">
-                                        <execute>xombrero</execute>
+                                        <execute>firefox</execute>
                                 </action>
                         </item>
                 </menu>

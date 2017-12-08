@@ -1,0 +1,1 @@
+git clone ssh://vollstock@vollbook.fritz.box/Users/vollstock/Nextcloud/Tooloop/Tooloop\ OS && sudo Tooloop\ OS/install-tooloop-os.sh
