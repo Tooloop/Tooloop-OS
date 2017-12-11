@@ -14,7 +14,7 @@ xset -dpms &
 xset b off &
 
 # Cleanup screenshots at reboot (there's also a cronjob at 00:01)
-sh /opt/tooloop/scripts/clean-screenshots.sh &
+tooloop-screenshots-clean &
 
 # Start your presentation
-sh /assets/presentation/start-presentation.sh &
+/bin/bash /assets/presentation/start-presentation.sh &

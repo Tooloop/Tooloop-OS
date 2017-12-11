@@ -71,8 +71,9 @@ echo " "
 echo "3/5 --- Configuring system"
 
 #Defaults secure_path="<default value>:/usr/local/bin"
-# Allow shutdown commands without password
-cat >/etc/sudoers.d/tooloop-shutdown <<EOF
+# Allow shutdown commands without password and add scripts path to sudo
+cat >/etc/sudoers.d/tooloop <<EOF
+Defaults  secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/tooloop/scripts"
 tooloop     ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
 EOF
 
@@ -166,7 +167,7 @@ cp -R "$SCRIPT_PATH"/include/clearsans /usr/share/fonts/truetype
 # Copy scripts
 mkdir -p /opt/tooloop
 cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
-chmod +x /opt/tooloop/scripts/*.sh
+chmod +x /opt/tooloop/scripts/*
 
 
 # Get settings server

@@ -34,6 +34,11 @@
                                         <execute>firefox</execute>
                                 </action>
                         </item>
+                        <item label="Install stuff" icon="/home/tooloop/.config/icons/menu_icon_install.png">
+                                <action name="Execute">
+                                        <execute>xterm -T "Install stuff" -e sudo tooloop-install-optional-stuff
+                                </action>
+                        </item>
                 </menu>
                 <separator/>
                 <item icon="/home/tooloop/.config/icons/menu_icon_reboot.png" label="Reboot">

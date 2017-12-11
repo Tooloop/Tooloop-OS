@@ -115,6 +115,9 @@ fi
 
 # Tooloop stuff
 
+# add scripts to PATH
+PATH="$PATH:/opt/tooloop/scripts"
+
 # Make every GUI tool appear on display 0, even from SSH
 export DISPLAY=:0
 export XAUTHORITY=~/.Xauthority
@@ -127,9 +130,9 @@ then
 fi
 
 # Tooloop aliases
-alias tooloop-presentation-start='sh /assets/presentation/start-presentation.sh'
-alias tooloop-presentation-stop='sh /assets/presentation/stop-presentation.sh'
-alias tooloop-presentation-reset='sh /assets/presentation/stop-presentation.sh && sh /assets/presentation/start-presentation.sh'
+alias tooloop-presentation-start='/bin/bash /assets/presentation/start-presentation.sh'
+alias tooloop-presentation-stop='/bin/bash /assets/presentation/stop-presentation.sh'
+alias tooloop-presentation-reset='/bin/bash /assets/presentation/stop-presentation.sh && /bin/bash /assets/presentation/start-presentation.sh'
 alias tooloop-display-off='xset dpms force off'
 alias tooloop-display-standby='xset dpms force standby'
 alias tooloop-display-on='xset dpms force on && xset -dpms'
@@ -137,4 +140,3 @@ alias tooloop-display-blink='xsetroot -solid "#e60050" && sleep 0.15 && xsetroot
 alias tooloop-settings='firefox localhost &'
 alias tooloop-vnc-on='x11vnc -shared -forever &'
 alias tooloop-vnc-off='kill $(pidof x11vnc)'
-alias tooloop-screenshot='/opt/tooloop/scripts/screenshot.sh'

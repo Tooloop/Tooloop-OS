@@ -225,12 +225,12 @@
           <enabled>true</enabled>
           <name>Settings</name>
         </startupnotify>
-        <command>firefoy localhost</command>
+        <command>firefox localhost</command>
       </action>
     </keybind>
     <keybind key="W-S-3">
       <action name="Execute">
-        <command>/opt/tooloop/scripts/screenshot.sh</command>
+        <command>tooloop-screenshot</command>
       </action>
     </keybind>
   </keyboard>
