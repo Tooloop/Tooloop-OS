@@ -36,7 +36,7 @@
                         </item>
                         <item label="Install stuff" icon="/home/tooloop/.config/icons/menu_icon_install.png">
                                 <action name="Execute">
-                                        <execute>xterm -T "Install stuff" -e sudo tooloop-install-optional-stuff
+                                        <execute>xterm -T "Install stuff" -e sudo tooloop-install-optional-stuff</execute>
                                 </action>
                         </item>
                 </menu>

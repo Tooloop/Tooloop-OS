@@ -13,7 +13,7 @@
 
 Many ideas for *Tooloop OS* are based on [this article](http://openframeworks.cc/ofBook/chapters/installation_up_4evr_linux.html) in the openframeworks book on keeping a linux installation up forever. However *Tooloop OS* tries to take the aproach one step further. It defines conventions for apps made for it and a set of [standardized hardware](https://github.com/vollstock/Tooloop-OS/wiki/hardware).
 
-![](https://github.com/vollstock/Tooloop-OS/wiki/images/easy.svg)
+![](https://github.com/vollstock/Tooloop-OS/wiki/images/easy.png)
 
 
 
