@@ -60,6 +60,8 @@ function install_amd_drivers {
   # TODO: possibly necessary (https://forum.ubuntuusers.de/topic/amd-athlon-5350-apu-und-radeon-treiber/)
   # dpkg-reconfigure xserver-xorg
   # update-initramfs -u -k all
+
+  usermod -a -G video tooloop
 }
 
 # ------------------------------------------------------------------------------
@@ -104,14 +106,15 @@ function install_nvidia_drivers {
 # openframeworks
 # ------------------------------------------------------------------------------
 function install_of {
-  apt-get -y install curl
-  wget http://openframeworks.cc/versions/v0.9.8/of_v0.9.8_linux64_release.tar.gz
-  tar xf of_v0.9.8_linux64_release.tar.gz
-  mv of_v0.9.8_linux64_release /assets/presentation/openframeworks
+  OF_VERSION="0.9.8"
+  wget http://openframeworks.cc/versions/v0.9.8/of_v$OF_VERSION_linux64_release.tar.gz
+  tar xf of_v$OF_VERSION_linux64_release.tar.gz
+  mv of_v$OF_VERSION_linux64_release /assets/presentation/openframeworks
   /assets/presentation/openframeworks/scripts/linux/ubuntu/install_dependencies.sh
   /assets/presentation/openframeworks/scripts/linux/ubuntu/install_codecs.sh
   /assets/presentation/openframeworks/scripts/linux/compileOF.sh -j3
   chown -R tooloop:tooloop /assets/presentation/openframeworks
+  rm of_v$OF_VERSION_linux64_release.tar.gz
 }
 
 
@@ -121,10 +124,26 @@ function install_of {
 # ------------------------------------------------------------------------------
 function install_kivy {
   add-apt-repository ppa:kivy-team/kivy
+  apt-get update
   apt-get -y install python3-kivy
   apt-get -y install python-kivy-examples
   mv /usr/share/kivy-examples /assets/presentation
   chown -R tooloop:tooloop /assets/presentation/kivy-examples
+}
+
+
+
+# ------------------------------------------------------------------------------
+# Processing
+# ------------------------------------------------------------------------------
+function install_processing {
+  PROCESSING_VERSION="3.3.6"
+  # Download Processing for Linux 64-bit
+  wget --no-check-certificate http://download.processing.org/processing-$PROCESSING_VERSION-linux64.tgz
+  # Unpack the downloaded package to the `/assets` drive
+  tar xvzf processing-$PROCESSING_VERSION-linux64.tgz
+  mv processing-$PROCESSING_VERSION /assets/presentation
+  rm xvzf processing-$PROCESSING_VERSION-linux64.tgz
 }
 
 
@@ -155,8 +174,8 @@ function install_ola {
     cd ola-0.10.5
     autoreconf -i
 
-    # enable python and java libs for Kivy and Processing
-    ./configure --enable-python-libs --enable-java-libs
+    # enable python libs for Kivy
+    ./configure --enable-python-libs
 
     # build it
     make -j 4
@@ -194,7 +213,7 @@ EOF
 # System update
 # ------------------------------------------------------------------------------
 function system_update {
-  apt-get update && apt-get upgrade
+  apt-get -y update && apt-get -y upgrade
 }
 
 
@@ -205,21 +224,18 @@ function system_update {
 # Print menu
 # ------------------------------------------------------------------------------
 
-#get_init_sys
 calc_wt_size
-# WT_WIDTH=60
-# WT_HEIGHT=20
-# WT_MENU_HEIGHT=13
 while true; do
   FUN=$(whiptail --title "Tooloop OS optional stuff" --menu "What do you want to install?" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Exit --ok-button Install \
-    "1 openframeworks" "openframeworks C++ media framework" \
+    "1 openframeworks 0.9.8" "openframeworks C++ media framework" \
     "2 Kivy" "Kivy python NUI framework" \
-    "3 GStreamer" "Gstreamer video components" \
-    "4 OLA" "Open Lighting Architecture" \
-    "5 AMD drivers" "Graphics drivers for FirePro series" \
-    "6 Nvidia drivers" "Graphics drivers for Quadro series" \
-    "7 System update" "UBUNTU system updates." \
+    "3 Processing 3.3.6" "Processing Java media framework" \
+    "4 GStreamer" "Gstreamer video components" \
+    "5 OLA" "Open Lighting Architecture" \
+    "6 System update" "UBUNTU system update" \
     3>&1 1>&2 2>&3)
+    # "7 AMD drivers" "Graphics drivers for FirePro series" \
+    # "8 Nvidia drivers" "Graphics drivers for Quadro series" \
   RET=$?
   if [ $RET -eq 1 ]; then
     exit 0
@@ -227,11 +243,12 @@ while true; do
     case "$FUN" in
       1\ *) install_of ;;
       2\ *) install_kivy ;;
-      3\ *) install_gstreamer ;;
-      4\ *) install_ola ;;
-      5\ *) install_amd_drivers ;;
-      6\ *) install_nvidia_drivers ;;
-      7\ *) system_update ;;
+      3\ *) install_processing ;;
+      4\ *) install_gstreamer ;;
+      5\ *) install_ola ;;
+      6\ *) system_update ;;
+      # 7\ *) install_amd_drivers ;;
+      # 8\ *) install_nvidia_drivers ;;
       *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
     esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
   else
