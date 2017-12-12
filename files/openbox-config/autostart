@@ -1,6 +1,9 @@
 # Set black background
 xsetroot -solid "#000000" &
 
+# Set resolution
+# xrandr --output <YOUR_DISPLAY> --mode <RESOLUTION>  --rate <REFRESHRATE>
+
 # Turn screen saver off
 xset s 0 &
 xset s blank &
