@@ -52,7 +52,6 @@ apt-get install -y --no-install-recommends \
   obmenu \
   obconf \
   firefox \
-  compton \
   ssh \
   x11vnc \
   pulseaudio \
