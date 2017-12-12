@@ -82,8 +82,12 @@ echo " "
 #Defaults secure_path="<default value>:/usr/local/bin"
 # Allow shutdown commands without password and add scripts path to sudo
 cat >/etc/sudoers.d/tooloop <<EOF
+# find and autocomplete tooloop scripts using sudo
 Defaults  secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/tooloop/scripts"
-tooloop     ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+# make an alias for x11vnc start and stop commands
+Cmnd_Alias VNC_CMNDS = /bin/systemctl start x11vnc, /bin/systemctl stop x11vnc
+# allow these commands without using a password
+tooloop     ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown, VNC_CMNDS
 EOF
 
 # Auto login
