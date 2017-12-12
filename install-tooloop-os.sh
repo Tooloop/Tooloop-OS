@@ -25,7 +25,10 @@ fi
 # Update
 # ------------------------------------------------------------------------------
 echo " "
-echo "1/5 --- Updating system"
+echo "-------------------------------------------------------------------------"
+echo "1/3 --- Updating system"
+echo "-------------------------------------------------------------------------"
+echo " "
 
 # Updating system
 apt-get update -y
@@ -36,7 +39,10 @@ apt-get dist-upgrade -y
 # Packages
 # ------------------------------------------------------------------------------
 echo " "
-echo "2/5 --- Installing base packages"
+echo "-------------------------------------------------------------------------"
+echo "2/3 --- Installing base packages"
+echo "-------------------------------------------------------------------------"
+echo " "
 
 # Install base packages
 apt-get install -y --no-install-recommends \
@@ -68,7 +74,10 @@ apt-get install -y --no-install-recommends \
 # Config
 # ------------------------------------------------------------------------------
 echo " "
-echo "3/5 --- Configuring system"
+echo "-------------------------------------------------------------------------"
+echo "3/3 --- Configuring system"
+echo "-------------------------------------------------------------------------"
+echo " "
 
 #Defaults secure_path="<default value>:/usr/local/bin"
 # Allow shutdown commands without password and add scripts path to sudo
@@ -181,6 +190,7 @@ mkdir -p /usr/lib/systemd/system/
 cat > /usr/lib/systemd/system/tooloop-settings-server.service <<EOF
 [Unit]
 Description=Tooloop settings server
+After=network.target
 
 [Service]
 Environment=DISPLAY=:0
@@ -192,22 +202,22 @@ Restart=always
 WantedBy=graphical.target
 EOF
 
-# Enable the service
+# Enable and start the service
 systemctl enable tooloop-settings-server
-
-# Start the service
 systemctl start tooloop-settings-server
 
 # Create a systemd service for the VNC server
 mkdir -p /usr/lib/systemd/system
 cat > /usr/lib/systemd/system/x11vnc.service <<EOF
 [Unit]
-Description=x11vnc remote session for login.
+Description=x11vnc screen sharing service
 After=network.target
 
 [Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/tooloop/.Xauthority
 Type=simple
-ExecStart=/bin/sh -c '/usr/bin/x11vnc -forever'
+ExecStart=/bin/sh -c '/usr/bin/x11vnc -shared -forever -passwd tooloop'
 Restart=on-success
 SuccessExitStatus=3
 
@@ -238,12 +248,16 @@ chown -R tooloop:tooloop /opt/tooloop/scripts/
 
 
 echo " "
+echo "-------------------------------------------------------------------------"
 echo "Done."
+echo "-------------------------------------------------------------------------"
 echo " "
+
 sleep 1
 
 echo "We will reboot now into your Tooloop OS installation."
 echo "Enjoy ;-)"
+
 sleep 5
 
 reboot
