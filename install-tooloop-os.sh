@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# Hi
+# Say hi
 echo "-------------------------------------------------------------------------"
 echo "Tooloop OS"
 echo "-------------------------------------------------------------------------"
 echo " "
 
-SCRIPT_PATH="`dirname \"$0\"`"              # relative
+# get the path to the script
+SCRIPT_PATH="`dirname \"$0\"`"                  # relative
 SCRIPT_PATH="`( cd \"$SCRIPT_PATH\" && pwd )`"  # absolutized and normalized
 if [ -z "$SCRIPT_PATH" ] ; then
   # error; for some reason, the path is not accessible
@@ -14,6 +15,7 @@ if [ -z "$SCRIPT_PATH" ] ; then
   exit 1  # fail
 fi
 
+# exit if we’re not root
 if [ $EUID != 0 ]; then
   echo "This script must be run as root."
   exit $exit_code
@@ -30,7 +32,7 @@ echo "1/3 --- Updating system"
 echo "-------------------------------------------------------------------------"
 echo " "
 
-# Updating system
+# Updating system first
 apt-get update -y
 apt-get dist-upgrade -y
 
@@ -67,7 +69,9 @@ apt-get install -y --no-install-recommends \
   vainfo \
   augeas-doc \
   augeas-lenses \
-  augeas-tools
+  augeas-tools \
+  bash-completion \
+  nano
 
 # ------------------------------------------------------------------------------
 # Config
@@ -78,8 +82,7 @@ echo "3/3 --- Configuring system"
 echo "-------------------------------------------------------------------------"
 echo " "
 
-#Defaults secure_path="<default value>:/usr/local/bin"
-# Allow shutdown commands without password and add scripts path to sudo
+# Allow shutdown commands without password and add tooloop scripts path to sudo
 cat >/etc/sudoers.d/tooloop <<EOF
 # find and autocomplete tooloop scripts using sudo
 Defaults  secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/opt/tooloop/scripts"
@@ -152,8 +155,7 @@ cat >/etc/sysctl.d/20-quiet-printk.conf <<EOF
 kernel.printk = 3 3 3 3
 EOF
 
-
-# Copy Bash config
+# Copy bash config
 cp "$SCRIPT_PATH"/files/bashrc /home/tooloop/.bashrc
 chown tooloop:tooloop /home/tooloop/.bashrc
 
@@ -181,11 +183,10 @@ mkdir -p /opt/tooloop
 cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
-
 # Get settings server
 git clone https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
 
-# install dependencies
+# Install dependencies
 /bin/bash /opt/tooloop/settings-server/install-dependencies.sh
 
 # Create a systemd service for settings server
@@ -228,13 +229,11 @@ SuccessExitStatus=3
 WantedBy=multi-user.target
 EOF
 
-
 # Create a cronjob to take a screenshot every minute
-(crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/screenshot.sh") | crontab -u tooloop -
+(crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
 
 # Create a cronjob to clean up screenshots every day at 00:00
-(crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/clean-screenshots.sh") | crontab -u tooloop -
-
+(crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
 
 # make Enttec USB DMX devices accessable to the tooloop user
 usermod -aG tty tooloop
@@ -242,7 +241,6 @@ usermod -aG dialout tooloop
 cat > /etc/udev/rules.d/75-permissions-enttec.rules <<EOF
 SUBSYSTEM=="usb", ACTION=="add|change", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", "MODE="0666"
 EOF
-
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
