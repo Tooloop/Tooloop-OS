@@ -24,17 +24,17 @@ Many ideas for *Tooloop OS* are based on [this article](http://openframeworks.cc
 
 - Low memory footprint
 - No unnecessary system services
-- Only bare minimum of [installed packages](https://github.com/vollstock/Tooloop-OS/wiki/overview)
+- Only bare minimum of [installed packages](https://github.com/vollstock/Tooloop-OS/wiki/system-overview)
 
 
 **Stable**  
-Debian Linux is known for its stability and it’s used all over the world as a power workhorse. It’s the solid foundation that you can trust. [Others](http://store.steampowered.com/steamos/) do, too and so does [Ubuntu](http://www.ubuntu.com), the base for Tooloop OS.
+Debian Linux is known for its stability and it’s used all over the world as a power workhorse. It’s the solid foundation that you can trust. [Others](http://store.steampowered.com/steamos/) do, too and so does [Ubuntu](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based), the base for Tooloop OS.
 
 
 **Compatible**
 Ubuntu linux is well known for it’s good support for hardware and was chosen for this reason as a basis. Linux is great but fighting with graphics drivers and getting your wifi chip up and running is no fun at all.
 
-But let's not stop there, just yet. The goal ist to maintain a [list of compatible hardware](https://github.com/vollstock/Tooloop-OS/wiki/overview) covering all the range from small and cheap to full-blown and powerful.
+But let's not stop there, just yet. The goal ist to maintain a [list of compatible hardware](https://github.com/vollstock/Tooloop-OS/wiki/hardware) covering all the range from small and cheap to full-blown and powerful.
 
 Don't waste your time on researching hardware. Choose an option from the shopping list and trust it will work just fine.
 
