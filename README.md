@@ -12,9 +12,9 @@
 *Tooloop OS* is for media artists. It is supposed to provide a platform that is reliable, lightweight and unobtrusive. It's also easy to maintain, even for those with little experience. You focus on your art. Let *Tooloop OS* present it in the best possible way!
 
 Many ideas for *Tooloop OS* are based on [this article](http://openframeworks.cc/ofBook/chapters/installation_up_4evr_linux.html) in the openframeworks book on keeping a linux installation up forever. However *Tooloop OS* tries to take the aproach one step further. It defines conventions for apps made for it and a set of [standardized hardware](https://github.com/vollstock/Tooloop-OS/wiki/hardware).
-
+  
 ![](https://github.com/vollstock/Tooloop-OS/wiki/images/easy.png)
-
+  
 
 
 # Features and goals
@@ -95,6 +95,6 @@ Install the base system following [this guide](https://github.com/vollstock/Tool
 
 Then Download and install the *Tooloop OS* repo:  
 
-    git clone https://github.com/vollstock/Tooloop-OS.git && sudo Tooloop-OS/install-tooloop-os.sh``
+    git clone https://github.com/vollstock/Tooloop-OS.git && sudo Tooloop-OS/install-tooloop-os.sh
 
 You can get your *Tooloop Box* up and running in about 30 minutes ;-).

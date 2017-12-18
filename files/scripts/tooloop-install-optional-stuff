@@ -141,11 +141,11 @@ function install_transparent_cursor {
   /tmp/xcursor-transparent-cursor/gen.sh
   # install them
   mkdir -p /home/tooloop/.icons
-  mv /tmp/xcursor-transparent-cursor/cursors /home/tooloop/.icons/
+  mv /tmp/xcursor-transparent-cursor /home/tooloop/.icons/default
   # restart openbox for immediate effect
   openbox --restart
   # clean up
-  rm -fr /tmp/xcursor-transparent-cursor
+  chown -R tooloop:tooloop /home/tooloop/.icons
 }
 
 
@@ -244,8 +244,8 @@ function system_update {
 calc_wt_size
 while true; do
   FUN=$(whiptail --title "Tooloop OS optional stuff" --menu "What do you want to install?" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Exit --ok-button Install \
-    "1 openframeworks 0.9.8" "openframeworks C++ media framework" \
-    "2 Processing 3.3.6" "Processing Java media framework" \
+    "1 openframeworks" "openframeworks 0.9.8 C++ media framework" \
+    "2 Processing" "Processing 3.3.6 Java media framework" \
     "3 Kivy" "Kivy python NUI framework" \
     "4 Transparent cursor" "For touch displays" \
     "5 GStreamer" "Gstreamer video components" \
