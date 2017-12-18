@@ -131,6 +131,23 @@ function install_kivy {
   chown -R tooloop:tooloop /assets/presentation/kivy-examples
 }
 
+# ------------------------------------------------------------------------------
+# Transparent cursor
+# ------------------------------------------------------------------------------
+function install_transparent_cursor {
+  # get rep
+  git clone https://github.com/vollstock/xcursor-transparent-cursor.git /tmp/xcursor-transparent-cursor
+  # generate cursors
+  /tmp/xcursor-transparent-cursor/gen.sh
+  # install them
+  mkdir -p /home/tooloop/.icons
+  mv /tmp/xcursor-transparent-cursor/cursors /home/tooloop/.icons/
+  # restart openbox for immediate effect
+  openbox --restart
+  # clean up
+  rm -fr /tmp/xcursor-transparent-cursor
+}
+
 
 
 # ------------------------------------------------------------------------------
@@ -228,11 +245,12 @@ calc_wt_size
 while true; do
   FUN=$(whiptail --title "Tooloop OS optional stuff" --menu "What do you want to install?" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Exit --ok-button Install \
     "1 openframeworks 0.9.8" "openframeworks C++ media framework" \
-    "2 Kivy" "Kivy python NUI framework" \
-    "3 Processing 3.3.6" "Processing Java media framework" \
-    "4 GStreamer" "Gstreamer video components" \
-    "5 OLA" "Open Lighting Architecture" \
-    "6 System update" "UBUNTU system update" \
+    "2 Processing 3.3.6" "Processing Java media framework" \
+    "3 Kivy" "Kivy python NUI framework" \
+    "4 Transparent cursor" "For touch displays" \
+    "5 GStreamer" "Gstreamer video components" \
+    "6 OLA" "Open Lighting Architecture" \
+    "7 System update" "UBUNTU system update" \
     3>&1 1>&2 2>&3)
     # "7 AMD drivers" "Graphics drivers for FirePro series" \
     # "8 Nvidia drivers" "Graphics drivers for Quadro series" \
@@ -242,11 +260,12 @@ while true; do
   elif [ $RET -eq 0 ]; then
     case "$FUN" in
       1\ *) install_of ;;
-      2\ *) install_kivy ;;
-      3\ *) install_processing ;;
-      4\ *) install_gstreamer ;;
-      5\ *) install_ola ;;
-      6\ *) system_update ;;
+      2\ *) install_processing ;;
+      3\ *) install_kivy ;;
+      4\ *) install_transparent_cursor ;;
+      5\ *) install_gstreamer ;;
+      6\ *) install_ola ;;
+      7\ *) system_update ;;
       # 7\ *) install_amd_drivers ;;
       # 8\ *) install_nvidia_drivers ;;
       *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
