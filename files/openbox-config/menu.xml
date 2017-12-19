@@ -10,7 +10,7 @@
                 <separator/>
                 <item label="Settings" icon="/home/tooloop/.config/icons/menu_icon_settings.png">
                         <action name="Execute">
-                                <execute>firefox localhost</execute>
+                                <execute>chromium-browser --app=http://localhost</execute>
                         </action>
                 </item>
                 <menu id="tools-menu" label="Tools" icon="/home/tooloop/.config/icons/menu_icon_tools.png">
@@ -31,7 +31,7 @@
                         </item>
                         <item label="Browser" icon="/home/tooloop/.config/icons/menu_icon_browser.png">
                                 <action name="Execute">
-                                        <execute>firefox</execute>
+                                        <execute>chromium-browser</execute>
                                 </action>
                         </item>
                         <item label="Install stuff" icon="/home/tooloop/.config/icons/menu_icon_install.png">

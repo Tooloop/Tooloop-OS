@@ -53,7 +53,7 @@ apt-get install -y --no-install-recommends \
   openbox \
   obmenu \
   obconf \
-  firefox \
+  chromium-browser \
   ssh \
   x11vnc \
   pulseaudio \
