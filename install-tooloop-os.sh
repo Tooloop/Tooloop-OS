@@ -71,7 +71,8 @@ apt-get install -y --no-install-recommends \
   augeas-lenses \
   augeas-tools \
   bash-completion \
-  nano
+  nano \
+  psmisc
 
 # ------------------------------------------------------------------------------
 # Config
