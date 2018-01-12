@@ -5,8 +5,8 @@
 
 
 if [ $EUID != 0 ]; then
-  echo "The installer needs rood privileges."
-  echo "Pleas run with sudo:"
+  echo "The installer needs root privileges."
+  echo "Please run with sudo:"
   echo "sudo tooloop-install-optional-stuff"
   exit $exit_code
     exit 1
@@ -40,6 +40,8 @@ function calc_wt_size {
 # AMD drivers
 # ------------------------------------------------------------------------------
 function install_amd_drivers {
+  whiptail --msgbox "Not yet :-(" $WT_HEIGHT $WT_WIDTH
+
   # Installation manual
   # https://support.amd.com/en-us/kb-articles/Pages/AMDGPU-PRO-Install.aspx
   
@@ -69,12 +71,17 @@ function install_amd_drivers {
 # ------------------------------------------------------------------------------
 function install_nvidia_drivers {
   whiptail --msgbox "Not yet :-(" $WT_HEIGHT $WT_WIDTH
+
+  NVIDIA_VERSION="384.111"
   # TODO: figure out how to withstand exiting xorg and rebooting in the installer...
 
-#   # Install NVIDIA
-
-#   # exit X11
+#   # ------------------------------------------------------------------------------
+#   # Exit X11
+#   # ------------------------------------------------------------------------------
 #   openbox --exit
+
+#   # stop x11 from starting after reboot
+#   sed -i '/startx/c\# startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1.' /home/tooloop/.bashrc
 
 #   # Disable Nouveau
 #   cat >/etc/modprobe.d/nvidia-installer-disable-nouveau.conf <<EOF
@@ -85,19 +92,25 @@ function install_nvidia_drivers {
 
 #   update-initramfs -u
 
-#   reboot
 
 #   # ------------------------------------------------------------------------------
-#   # Install
+#   # Download installer and run it
 #   # ------------------------------------------------------------------------------
 
-#   chmod +x NVIDIA-Linux-x86_64-384.90.run
+#   wget http://us.download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_VERSION}.run
+#   chmod +x NVIDIA-Linux-x86_64-${NVIDIA_VERSION}.run
 
-#   ./ NVIDIA-Linux-x86_64-384.90.run
+
+#   # TODO: place in .bashrc
+#   ./NVIDIA-Linux-x86_64-${NVIDIA_VERSION}.run
 
 #   # repair link so we can compile GL stuff
 #   cd /usr/lib
-#   sudo ln -s libGL.so.1 libGL.so 
+#   ln -s libGL.so.1 libGL.so 
+
+#   # TODO: add NVIDIA settings to desktop menu
+
+#   reboot
 }
 
 
@@ -107,14 +120,14 @@ function install_nvidia_drivers {
 # ------------------------------------------------------------------------------
 function install_of {
   OF_VERSION="0.9.8"
-  wget http://openframeworks.cc/versions/v0.9.8/of_v$OF_VERSION_linux64_release.tar.gz
-  tar xf of_v$OF_VERSION_linux64_release.tar.gz
-  mv of_v$OF_VERSION_linux64_release /assets/presentation/openframeworks
+  wget http://openframeworks.cc/versions/v${OF_VERSION}/of_v${OF_VERSION}_linux64_release.tar.gz
+  tar xf of_v${OF_VERSION}_linux64_release.tar.gz
+  mv of_v${OF_VERSION}_linux64_release /assets/presentation/openframeworks
   /assets/presentation/openframeworks/scripts/linux/ubuntu/install_dependencies.sh
   /assets/presentation/openframeworks/scripts/linux/ubuntu/install_codecs.sh
   /assets/presentation/openframeworks/scripts/linux/compileOF.sh -j3
   chown -R tooloop:tooloop /assets/presentation/openframeworks
-  rm of_v$OF_VERSION_linux64_release.tar.gz
+  rm of_v${OF_VERSION}_linux64_release.tar.gz
 }
 
 
@@ -135,6 +148,7 @@ function install_kivy {
 # Transparent cursor
 # ------------------------------------------------------------------------------
 function install_transparent_cursor {
+  # TODO: check if already installed, if so, offer uninstall
   # get rep
   git clone https://github.com/vollstock/xcursor-transparent-cursor.git /tmp/xcursor-transparent-cursor
   # generate cursors
@@ -156,11 +170,11 @@ function install_transparent_cursor {
 function install_processing {
   PROCESSING_VERSION="3.3.6"
   # Download Processing for Linux 64-bit
-  wget --no-check-certificate http://download.processing.org/processing-$PROCESSING_VERSION-linux64.tgz
+  wget --no-check-certificate http://download.processing.org/processing-${PROCESSING_VERSION}-linux64.tgz
   # Unpack the downloaded package to the `/assets` drive
-  tar xvzf processing-$PROCESSING_VERSION-linux64.tgz
-  mv processing-$PROCESSING_VERSION /assets/presentation
-  rm xvzf processing-$PROCESSING_VERSION-linux64.tgz
+  tar xvzf processing-${PROCESSING_VERSION}-linux64.tgz
+  mv processing-${PROCESSING_VERSION} /assets/presentation
+  rm xvzf processing-${PROCESSING_VERSION}-linux64.tgz
 }
 
 
@@ -180,30 +194,31 @@ function install_gstreamer {
 # Open Lighting Architecture
 # ------------------------------------------------------------------------------
 function install_ola {
-    # install dependencies
-    apt-get -y install libcppunit-dev libcppunit-1.13-0v5 uuid-dev pkg-config libncurses5-dev libtool autoconf automake g++ libmicrohttpd-dev libmicrohttpd10 protobuf-compiler libprotobuf-lite9v5 python-protobuf libprotobuf-dev libprotoc-dev zlib1g-dev bison flex make libftdi-dev libftdi1 libusb-1.0-0-dev liblo-dev libavahi-client-dev python-numpy
+  OLA_VERSION="0.10.5"
+  # install dependencies
+  apt-get -y install libcppunit-dev libcppunit-1.13-0v5 uuid-dev pkg-config libncurses5-dev libtool autoconf automake g++ libmicrohttpd-dev libmicrohttpd10 protobuf-compiler libprotobuf-lite9v5 python-protobuf libprotobuf-dev libprotoc-dev zlib1g-dev bison flex make libftdi-dev libftdi1 libusb-1.0-0-dev liblo-dev libavahi-client-dev python-numpy
 
-    # download latest tarball
-    wget https://github.com/OpenLightingProject/ola/releases/download/0.10.5/ola-0.10.5.tar.gz
+  # download latest tarball
+  wget https://github.com/OpenLightingProject/ola/releases/download/${0.10.5}/ola-${0.10.5}.tar.gz
 
-    # extract it
-    tar -zxf ola-0.10.5.tar.gz
-    cd ola-0.10.5
-    autoreconf -i
+  # extract it
+  tar -zxf ola-${0.10.5}.tar.gz
+  cd ola-${0.10.5}
+  autoreconf -i
 
-    # enable python libs for Kivy
-    ./configure --enable-python-libs
+  # enable python libs for Kivy
+  ./configure --enable-python-libs
 
-    # build it
-    make -j 4
-    make check
-    make install
-    ldconfig
+  # build it
+  make -j 4
+  make check
+  make install
+  ldconfig
 
 
-    # Create a systemd service
-    mkdir -p /usr/lib/systemd/system/
-    cat > /usr/lib/systemd/system/olad.service <<EOF
+  # Create a systemd service
+  mkdir -p /usr/lib/systemd/system/
+  cat > /usr/lib/systemd/system/olad.service <<EOF
 [Unit]
 Description=Open Lighting Architecture daemon
 After=network.target
@@ -217,11 +232,11 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-    # Enable the service
-    systemctl enable olad
+  # Enable the service
+  systemctl enable olad
 
-    # Start the service
-    systemctl start olad
+  # Start the service
+  systemctl start olad
 }
 
 
