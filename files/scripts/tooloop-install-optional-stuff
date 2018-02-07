@@ -108,7 +108,8 @@ function install_nvidia_drivers {
 #   cd /usr/lib
 #   ln -s libGL.so.1 libGL.so 
 
-#   # TODO: add NVIDIA settings to desktop menu
+#   # Install hardware acceleration
+#   libvdpau1 vdpauinfo vdpau-va-driver vainfo
 
 #   reboot
 }
