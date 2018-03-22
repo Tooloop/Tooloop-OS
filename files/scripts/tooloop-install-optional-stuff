@@ -137,9 +137,9 @@ function install_of {
 # ------------------------------------------------------------------------------
 function install_kivy {
   add-apt-repository ppa:kivy-team/kivy
-  apt-get update
-  apt-get -y install python3-kivy
-  apt-get -y install python-kivy-examples
+  apt update
+  apt -y install python3-kivy
+  apt -y install python-kivy-examples
   mv /usr/share/kivy-examples /assets/presentation
   chown -R tooloop:tooloop /assets/presentation/kivy-examples
 }
@@ -184,8 +184,8 @@ function install_processing {
 # ------------------------------------------------------------------------------
 function install_gstreamer {
   echo "Getting packages..."
-  apt-get -y install mpg123 libmpg123-dev gstreamer1.0 gstreamer1.0-doc gstreamer1.0-tools  gstreamer1.0-alsa gstreamer1.0-libav gstreamer1.0-pulseaudio gstreamer1.0-plugins-base gstreamer1.0-plugins-base-doc gstreamer1.0-plugins-base-dbg gstreamer1.0-plugins-good gstreamer1.0-plugins-good-doc gstreamer1.0-plugins-good-dbg gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-doc gstreamer1.0-plugins-bad-dbg gstreamer1.0-plugins-ugly gstreamer1.0-plugins-ugly-doc gstreamer1.0-plugins-ugly-dbg gstreamer1.0-vaapi gstreamer1.0-vaapi-doc gstreamer1.0-x libgstreamer1.0-0 libgstreamer1.0-0-dbg libgstreamer1.0-dev
-  apt-get -y install va-driver-all libva-glx1 libva-x11-1 vainfo vainfo
+  apt -y install mpg123 libmpg123-dev gstreamer1.0 gstreamer1.0-doc gstreamer1.0-tools  gstreamer1.0-alsa gstreamer1.0-libav gstreamer1.0-pulseaudio gstreamer1.0-plugins-base gstreamer1.0-plugins-base-doc gstreamer1.0-plugins-base-dbg gstreamer1.0-plugins-good gstreamer1.0-plugins-good-doc gstreamer1.0-plugins-good-dbg gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-doc gstreamer1.0-plugins-bad-dbg gstreamer1.0-plugins-ugly gstreamer1.0-plugins-ugly-doc gstreamer1.0-plugins-ugly-dbg gstreamer1.0-vaapi gstreamer1.0-vaapi-doc gstreamer1.0-x libgstreamer1.0-0 libgstreamer1.0-0-dbg libgstreamer1.0-dev
+  apt -y install va-driver-all libva-glx1 libva-x11-1 vainfo vainfo
 }
 
 
@@ -196,7 +196,7 @@ function install_gstreamer {
 function install_ola {
   OLA_VERSION="0.10.5"
   # install dependencies
-  apt-get -y install libcppunit-dev libcppunit-1.13-0v5 uuid-dev pkg-config libncurses5-dev libtool autoconf automake g++ libmicrohttpd-dev libmicrohttpd10 protobuf-compiler libprotobuf-lite9v5 python-protobuf libprotobuf-dev libprotoc-dev zlib1g-dev bison flex make libftdi-dev libftdi1 libusb-1.0-0-dev liblo-dev libavahi-client-dev python-numpy
+  apt -y install libcppunit-dev libcppunit-1.13-0v5 uuid-dev pkg-config libncurses5-dev libtool autoconf automake g++ libmicrohttpd-dev libmicrohttpd10 protobuf-compiler libprotobuf-lite9v5 python-protobuf libprotobuf-dev libprotoc-dev zlib1g-dev bison flex make libftdi-dev libftdi1 libusb-1.0-0-dev liblo-dev libavahi-client-dev python-numpy
 
   # download latest tarball
   wget https://github.com/OpenLightingProject/ola/releases/download/${0.10.5}/ola-${0.10.5}.tar.gz
@@ -245,7 +245,7 @@ EOF
 # System update
 # ------------------------------------------------------------------------------
 function system_update {
-  apt-get -y update && apt-get -y upgrade
+  apt -y update && apt -y upgrade
 }
 
 
