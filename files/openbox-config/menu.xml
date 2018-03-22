@@ -4,7 +4,7 @@
 
         <item icon="/home/tooloop/.config/icons/menu_icon_start_presentation.png" label="Start presentation">
             <action name="Execute">
-                <execute>sh /assets/presentation/start-presentation.sh</execute>
+                <execute>/bin/bash /assets/presentation/start-presentation.sh</execute>
             </action>
         </item>
 
