@@ -211,6 +211,9 @@ EOF
 systemctl enable tooloop-settings-server
 systemctl start tooloop-settings-server
 
+# Get example apps
+git clone https://github.com/vollstock/Tooloop-Examples.git /assets/apps
+
 # Create a systemd service for the VNC server
 mkdir -p /usr/lib/systemd/system
 cat > /usr/lib/systemd/system/x11vnc.service <<EOF
@@ -246,7 +249,7 @@ EOF
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
 chown -R tooloop:tooloop /home/tooloop/
-chown -R tooloop:tooloop /opt/tooloop/scripts/
+chown -R tooloop:tooloop /opt/tooloop/
 
 
 echo " "
