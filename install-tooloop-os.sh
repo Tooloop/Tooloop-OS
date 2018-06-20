@@ -33,8 +33,8 @@ echo "-------------------------------------------------------------------------"
 echo " "
 
 # Updating system first
-apt-get update -y
-apt-get dist-upgrade -y
+apt update -y
+apt dist-upgrade -y
 
 
 # ------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ echo "-------------------------------------------------------------------------"
 echo " "
 
 # Install base packages
-apt-get install -y --no-install-recommends \
+apt install -y --no-install-recommends \
   xorg \
   x11-xserver-utils \
   openbox \
