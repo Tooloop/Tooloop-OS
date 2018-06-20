@@ -72,7 +72,8 @@ apt-get install -y --no-install-recommends \
   augeas-tools \
   bash-completion \
   nano \
-  psmisc
+  psmisc \
+  pcregrep
 
 # ------------------------------------------------------------------------------
 # Config
