@@ -29,7 +29,7 @@
             </item>
             <item icon="/home/tooloop/.config/icons/menu_icon_terminal.png" label="Terminal">
                 <action name="Execute">
-                    <execute>xterm -background grey7</execute>
+                    <execute>xterm -background grey7 -fa 'Monospace' -fs 12</execute>
                 </action>
             </item>
             <item icon="/home/tooloop/.config/icons/menu_icon_browser.png" label="Browser">
