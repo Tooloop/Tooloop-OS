@@ -16,6 +16,9 @@ xset -dpms &
 # Disable bell
 xset b off &
 
+# Start pulseaudio server
+pulseaudio --start
+
 # Cleanup screenshots at reboot (there's also a cronjob at 00:01)
 tooloop-screenshots-clean &
 
