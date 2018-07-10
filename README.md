@@ -26,6 +26,7 @@ Being an Ubuntu Linux, Tooloop OS can run pretty much any Linux software. Howeve
 - [openframeworks](http://openframeworks.cc/)
 - [Processing](https://processing.org)
 - [Kivy](https://kivy.org/)
+- [Unity](https://unity3d.com)
 
 If you have written an application using one of these, Tooloop might just be what you need to stop worrying about deploying your live system.
 
