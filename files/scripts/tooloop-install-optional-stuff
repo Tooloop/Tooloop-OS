@@ -202,8 +202,8 @@ function install_ola {
   wget https://github.com/OpenLightingProject/ola/releases/download/${OLA_VERSION}/ola-${OLA_VERSION}.tar.gz
 
   # extract it
-  tar -zxf ola-${0.10.5}.tar.gz
-  cd ola-${0.10.5}
+  tar -zxf ola-${OLA_VERSION}.tar.gz
+  cd ola-${OLA_VERSION}
   autoreconf -i
 
   # enable python libs for Kivy
