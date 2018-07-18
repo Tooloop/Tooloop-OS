@@ -120,7 +120,7 @@ function install_nvidia_drivers {
 # ------------------------------------------------------------------------------
 function install_of {
   OF_VERSION="0.9.8"
-  wget http://openframeworks.cc/versions/v${OF_VERSION}/of_v${OF_VERSION}_linux64_release.tar.gz
+  wget http://openframeworks.cc/versions/v${OF_VERSION}/of_v${OF_VERSION}_linux64_release.tar.gz --no-check-certificate
   tar xf of_v${OF_VERSION}_linux64_release.tar.gz
   mv of_v${OF_VERSION}_linux64_release /assets/presentation/openframeworks
   /assets/presentation/openframeworks/scripts/linux/ubuntu/install_dependencies.sh
@@ -199,7 +199,7 @@ function install_ola {
   apt -y install libcppunit-dev libcppunit-1.13-0v5 uuid-dev pkg-config libncurses5-dev libtool autoconf automake g++ libmicrohttpd-dev libmicrohttpd10 protobuf-compiler libprotobuf-lite9v5 python-protobuf libprotobuf-dev libprotoc-dev zlib1g-dev bison flex make libftdi-dev libftdi1 libusb-1.0-0-dev liblo-dev libavahi-client-dev python-numpy
 
   # download latest tarball
-  wget https://github.com/OpenLightingProject/ola/releases/download/${0.10.5}/ola-${0.10.5}.tar.gz
+  wget https://github.com/OpenLightingProject/ola/releases/download/${OLA_VERSION}/ola-${OLA_VERSION}.tar.gz
 
   # extract it
   tar -zxf ola-${0.10.5}.tar.gz
