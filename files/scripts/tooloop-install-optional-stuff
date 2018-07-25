@@ -290,9 +290,9 @@ else
       "5 GStreamer" "Gstreamer video components" \
       "6 OLA" "Open Lighting Architecture" \
       "7 System update" "UBUNTU system update" \
+      "8 Nvidia drivers" "Graphics drivers for Nvidia cards" \
       3>&1 1>&2 2>&3)
       # "7 AMD drivers" "Graphics drivers for FirePro series" \
-      # "8 Nvidia drivers" "Graphics drivers for Quadro series" \
     RET=$?
     if [ $RET -eq 1 ]; then
       exit 0
@@ -305,8 +305,8 @@ else
         5\ *) install_gstreamer ;;
         6\ *) install_ola ;;
         7\ *) system_update ;;
+        8\ *) install_nvidia_drivers ;;
         # 7\ *) install_amd_drivers ;;
-        # 8\ *) install_nvidia_drivers ;;
         *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
       esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
     else
