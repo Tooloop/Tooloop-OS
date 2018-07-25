@@ -122,11 +122,15 @@ PATH="$PATH:/opt/tooloop/scripts"
 export DISPLAY=:0
 export XAUTHORITY=~/.Xauthority
 
-# Auto start openbox
-# only from the linux term (not from xterm or SSH)
-if [ $TERM = "linux" ]
-then
-  startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1
+# Start X11 / openbox
+# only if we don't have install tasks to do
+# and only from linux term (not from xterm or SSH)
+if [ $TERM = "linux" ]; then
+  if [ -f /opt/tooloop/install_tasks.sh ]; then
+    /bin/bash /opt/tooloop/install_tasks.sh
+  else
+    startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1
+  fi
 fi
 
 # Tooloop aliases
