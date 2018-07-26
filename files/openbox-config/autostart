@@ -4,6 +4,12 @@ xsetroot -solid "#000000" &
 # Set resolution
 # xrandr --output <YOUR_DISPLAY> --mode <RESOLUTION>  --rate <REFRESHRATE> &
 
+# Start pulseaudio server
+pulseaudio --start
+
+# Start your presentation
+/bin/bash /assets/presentation/start-presentation.sh &
+
 # Turn screen saver off
 xset s 0 &
 xset s blank &
@@ -16,11 +22,10 @@ xset -dpms &
 # Disable bell
 xset b off &
 
-# Start pulseaudio server
-pulseaudio --start
-
 # Cleanup screenshots at reboot (there's also a cronjob at 00:01)
 tooloop-screenshots-clean &
 
-# Start your presentation
-/bin/bash /assets/presentation/start-presentation.sh &
+# Start xsession systemd target
+# which in turn can trigger all services depending on it
+systemctl --user import-environment PATH DBUS_SESSION_BUS_ADDRESS
+systemctl --no-block --user start xsession.target

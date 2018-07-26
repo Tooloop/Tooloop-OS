@@ -215,12 +215,19 @@ systemctl start tooloop-settings-server
 # Get example apps
 git clone https://github.com/vollstock/Tooloop-Examples.git /assets/apps
 
+# Create a systemd target for Xorg
+# info here: https://superuser.com/a/1128905
+mkdir -p /usr/lib/systemd/user
+cat > /usr/lib/systemd/user/xsession.target <<EOF
+[Unit]
+Description=XSession
+BindsTo=graphical-session.target
+EOF
+
 # Create a systemd service for the VNC server
-mkdir -p /usr/lib/systemd/system
-cat > /usr/lib/systemd/system/x11vnc.service <<EOF
+cat > /usr/lib/systemd/user/x11vnc.service <<EOF
 [Unit]
 Description=x11vnc screen sharing service
-After=network.target
 
 [Service]
 Environment=DISPLAY=:0
@@ -231,7 +238,7 @@ Restart=on-success
 SuccessExitStatus=3
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=xsession.target
 EOF
 
 # Create a cronjob to take a screenshot every minute
