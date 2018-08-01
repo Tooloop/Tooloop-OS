@@ -132,15 +132,3 @@ if [ $TERM = "linux" ]; then
     startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1
   fi
 fi
-
-# Tooloop aliases
-alias tooloop-presentation-start='/bin/bash /assets/presentation/start-presentation.sh'
-alias tooloop-presentation-stop='/bin/bash /assets/presentation/stop-presentation.sh'
-alias tooloop-presentation-reset='/bin/bash /assets/presentation/stop-presentation.sh && /bin/bash /assets/presentation/start-presentation.sh'
-alias tooloop-display-off='xset dpms force off'
-alias tooloop-display-standby='xset dpms force standby'
-alias tooloop-display-on='xset dpms force on && xset -dpms'
-alias tooloop-display-blink='xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black && sleep 0.15 && xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black && sleep 0.15 && xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black && sleep 0.15 && xsetroot -solid "#e60050" && sleep 0.15 && xsetroot -solid black'
-alias tooloop-settings='chromium-browser --app=http://localhost &'
-alias tooloop-vnc-start='sudo systemctl start x11vnc'
-alias tooloop-vnc-stop='sudo systemctl stop x11vnc'

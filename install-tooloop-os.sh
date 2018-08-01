@@ -138,7 +138,7 @@ cat >/etc/issue.net <<EOF
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
                                                          |
-                      Tooloop OS 0.9  |  Ubuntu 16.04.3  |
+                  Tooloop OS 0.9 alpha  |  Ubuntu 16.04  |
 
 
 Hint: There's a bunch of convenient aliases starting with tooloop-...

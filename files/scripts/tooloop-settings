@@ -1,0 +1,5 @@
+#!/bin/bash
+
+chromium-browser --app=http://localhost &
+
+exit 0

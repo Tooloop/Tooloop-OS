@@ -1,0 +1,19 @@
+#!/bin/bash
+
+xsetroot -solid "#e60050"
+sleep 0.15
+xsetroot -solid black
+sleep 0.15
+xsetroot -solid "#e60050"
+sleep 0.15
+xsetroot -solid black
+sleep 0.15
+xsetroot -solid "#e60050"
+sleep 0.15
+xsetroot -solid black
+sleep 0.15
+xsetroot -solid "#e60050"
+sleep 0.15
+xsetroot -solid black
+
+exit 0

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/bin/bash /assets/presentation/stop-presentation.sh
+
+exit 0

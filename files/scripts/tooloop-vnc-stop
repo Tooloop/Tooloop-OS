@@ -1,0 +1,5 @@
+#!/bin/bash
+
+systemctl --user stop x11vnc.service
+
+exit 0

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+xset dpms force standby
+
+exit 0

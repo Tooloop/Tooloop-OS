@@ -1,0 +1,6 @@
+#!/bin/bash
+
+/opt/tooloop/scripts/tooloop-presentation-stop
+/opt/tooloop/scripts/tooloop-display-off
+
+exit 0
