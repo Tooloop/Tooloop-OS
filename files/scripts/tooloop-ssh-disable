@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo systemctl stop ssh
+sudo systemctl disable ssh
+
+exit 0

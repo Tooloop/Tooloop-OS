@@ -1,5 +1,6 @@
 #!/bin/bash
 
+systemctl --user enable x11vnc.service
 systemctl --user start x11vnc.service
 
 exit 0

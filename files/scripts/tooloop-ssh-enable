@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
+exit 0
