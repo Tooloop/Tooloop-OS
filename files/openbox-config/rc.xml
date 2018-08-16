@@ -207,7 +207,7 @@
           <enabled>true</enabled>
           <name>Terminal</name>
         </startupnotify>
-        <command>xterm -background grey7 -fa 'Monospace' -fs 12</command>
+        <command>tooloop-terminal</command>
       </action>
     </keybind>
     <keybind key="W-c">
@@ -216,7 +216,7 @@
           <enabled>true</enabled>
           <name>Clock</name>
         </startupnotify>
-        <command>xclock -digital -strftime "%H:%M:%S" -update 1 -padding 20 -foreground "#e60050" -background black</command>
+        <command>tooloop-clock</command>
       </action>
     </keybind>
     <keybind key="W-s">

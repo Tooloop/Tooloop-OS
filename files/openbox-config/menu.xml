@@ -24,12 +24,12 @@
 
             <item icon="/home/tooloop/.config/icons/menu_icon_clock.png" label="Clock">
                 <action name="Execute">
-                    <execute>xclock -digital -strftime &quot;%H:%M:%S&quot; -update 1 -padding 20 -foreground &quot;#e60050&quot; -background black</execute>'
+                    <execute>tooloop-clock</execute>'
                 </action>
             </item>
             <item icon="/home/tooloop/.config/icons/menu_icon_terminal.png" label="Terminal">
                 <action name="Execute">
-                    <execute>xterm -background grey7 -fa 'Monospace' -fs 12</execute>
+                    <execute>tooloop-terminal</execute>
                 </action>
             </item>
             <item icon="/home/tooloop/.config/icons/menu_icon_browser.png" label="Browser">

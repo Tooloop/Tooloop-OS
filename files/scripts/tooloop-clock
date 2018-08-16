@@ -1,0 +1,10 @@
+#!/bin/bash
+
+/usr/bin/xclock \
+ -digital \
+ -strftime "%H:%M:%S" \
+ -update 1 \
+ -padding 20 \
+ -foreground "#e60050" \
+ -background grey7 \
+ -face "Clear Sans-48" &
