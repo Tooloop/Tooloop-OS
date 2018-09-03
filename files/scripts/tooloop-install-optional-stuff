@@ -183,7 +183,7 @@ function install_processing {
   # Unpack the downloaded package to the `/assets` drive
   tar xvzf processing-${PROCESSING_VERSION}-linux64.tgz
   mv processing-${PROCESSING_VERSION} /assets/presentation
-  rm xvzf processing-${PROCESSING_VERSION}-linux64.tgz
+  rm processing-${PROCESSING_VERSION}-linux64.tgz
 }
 
 
