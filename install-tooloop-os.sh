@@ -103,11 +103,18 @@ ExecStart=/sbin/agetty --skip-login --noissue --autologin "tooloop" %I
 EOF
 
 # Create the /assets folder sctructure
-mkdir -p /assets/presentation
+mkdir -p /assets/addons
 mkdir -p /assets/data
-mkdir -p /assets/screenshots
 mkdir -p /assets/logs
-mkdir -p /assets/apps
+mkdir -p /assets/packages/metainfo
+mkdir -p /assets/presentation
+mkdir -p /assets/screenshots
+
+# Stop apt from removing empty files in case in uninstalls stuff
+touch /assets/addons/.keep
+touch /assets/data/.keep
+touch /assets/presentation/.keep
+
 
 # Silent boot
 augtool<<EOF
@@ -212,8 +219,8 @@ EOF
 systemctl enable tooloop-settings-server
 systemctl start tooloop-settings-server
 
-# Get example apps
-git clone https://github.com/vollstock/Tooloop-Examples.git /assets/apps
+# Get bundled packages
+# git clone https://github.com/vollstock/Tooloop-Packages.git /assets/packages
 
 # Create a systemd target for Xorg
 # info here: https://superuser.com/a/1128905
