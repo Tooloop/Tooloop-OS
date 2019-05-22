@@ -107,7 +107,6 @@ EOF
 mkdir -p /assets/addons
 mkdir -p /assets/data
 mkdir -p /assets/logs
-mkdir -p /assets/packages/metainfo
 mkdir -p /assets/presentation
 mkdir -p /assets/screenshots
 
@@ -121,8 +120,7 @@ touch /assets/presentation/.keep
 augtool<<EOF
 set /files/etc/default/grub/GRUB_DEFAULT 0
 set /files/etc/default/grub/GRUB_TIMEOUT 0
-set /files/etc/default/grub/GRUB_CMDLINE_LINUX \""console=tty12\""
-set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT \""quiet loglevel=3 vga=current rd.systemd.show_status=false rd.udev.log-priority=3\""
+set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT \""console=tty12 quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3\""
 save
 EOF
 
@@ -146,7 +144,7 @@ cat >/etc/issue.net <<EOF
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
                                                          |
-                  Tooloop OS 0.9 alpha  |  Ubuntu 16.04  |
+                  Tooloop OS 0.9 alpha  |  Ubuntu 18.04  |
 
 
 Hint: There's a bunch of convenient aliases starting with tooloop-...
@@ -178,7 +176,7 @@ mkdir -p /home/tooloop/.config/openbox
 cp -R "$SCRIPT_PATH"/files/openbox-config/* /home/tooloop/.config/openbox/
 
 # Copy Openbox menu icons
-mkdir -p /home/tooloop/.config/icons
+mkdir -p /home/tooloop/.config/openbox-menu-icons
 cp -R "$SCRIPT_PATH"/files/openbox-menu-icons/* /home/tooloop/.config/icons/
 
 # Copy start- and stop-presentation scripts
@@ -199,6 +197,15 @@ git clone https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/
 # Install dependencies
 /bin/bash /opt/tooloop/settings-server/install-dependencies.sh
 
+# Create a systemd target for Xorg
+# info here: https://superuser.com/a/1128905
+mkdir -p /usr/lib/systemd/user
+cat > /usr/lib/systemd/user/xsession.target <<EOF
+[Unit]
+Description=XSession
+BindsTo=graphical-session.target
+EOF
+
 # Create a systemd service for settings server
 mkdir -p /usr/lib/systemd/system/
 cat > /usr/lib/systemd/system/tooloop-settings-server.service <<EOF
@@ -213,7 +220,7 @@ ExecStart=/usr/bin/python /opt/tooloop/settings-server/tooloop-settings-server.p
 Restart=always
 
 [Install]
-WantedBy=graphical.target
+WantedBy=xsession.target
 EOF
 
 # Enable and start the service
@@ -221,16 +228,9 @@ systemctl enable tooloop-settings-server
 systemctl start tooloop-settings-server
 
 # Get bundled packages
-# git clone https://github.com/vollstock/Tooloop-Packages.git /assets/packages
+# git clone --single-branch --branch appcenter https://github.com/Tooloop/Tooloop-Packages.git /assets/packages
+# mkdir -p /assets/packages/metainfo
 
-# Create a systemd target for Xorg
-# info here: https://superuser.com/a/1128905
-mkdir -p /usr/lib/systemd/user
-cat > /usr/lib/systemd/user/xsession.target <<EOF
-[Unit]
-Description=XSession
-BindsTo=graphical-session.target
-EOF
 
 # Create a systemd service for the VNC server
 cat > /usr/lib/systemd/user/x11vnc.service <<EOF
