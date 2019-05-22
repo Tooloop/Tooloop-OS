@@ -29,7 +29,7 @@
             </item>
             <item icon="/home/tooloop/.config/icons/menu_icon_terminal.png" label="Terminal">
                 <action name="Execute">
-                    <execute>tooloop-terminal</execute>
+                    <execute>gnome-terminal</execute>
                 </action>
             </item>
             <item icon="/home/tooloop/.config/icons/menu_icon_browser.png" label="Browser">
@@ -39,7 +39,7 @@
             </item>
             <item icon="/home/tooloop/.config/icons/menu_icon_install.png" label="Install stuff">
                 <action name="Execute">
-                    <execute>xterm -T &quot;Install stuff&quot; -e sudo tooloop-install-optional-stuff</execute>
+                    <execute>gnome-terminal -t &quot;Install stuff&quot; --hide-menubar -- sudo tooloop-install-optional-stuff</execute>
                 </action>
             </item>
         </menu>

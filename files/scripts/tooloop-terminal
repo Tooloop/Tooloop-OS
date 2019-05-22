@@ -1,6 +1,0 @@
-#!/bin/bash
-
-/usr/bin/xterm \
- -background grey7 \
- -fa 'Monospace' \
- -fs 12 &
