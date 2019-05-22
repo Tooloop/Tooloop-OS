@@ -59,6 +59,7 @@ apt install -y --no-install-recommends \
   pulseaudio \
   pavucontrol \
   unclutter \
+  hsetroot \
   scrot \
   git \
   unzip \
