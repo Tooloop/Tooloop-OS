@@ -110,11 +110,6 @@ mkdir -p /assets/logs
 mkdir -p /assets/presentation
 mkdir -p /assets/screenshots
 
-# Stop apt from removing empty files in case in uninstalls stuff
-touch /assets/addons/.keep
-touch /assets/data/.keep
-touch /assets/presentation/.keep
-
 
 # Silent boot
 augtool<<EOF
@@ -191,12 +186,6 @@ mkdir -p /opt/tooloop
 cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
-# Get settings server
-git clone https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
-
-# Install dependencies
-/bin/bash /opt/tooloop/settings-server/install-dependencies.sh
-
 # Create a systemd target for Xorg
 # info here: https://superuser.com/a/1128905
 mkdir -p /usr/lib/systemd/user
@@ -205,6 +194,12 @@ cat > /usr/lib/systemd/user/xsession.target <<EOF
 Description=XSession
 BindsTo=graphical-session.target
 EOF
+
+# Get settings server
+git clone https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
+
+# Install dependencies
+/bin/bash /opt/tooloop/settings-server/install-dependencies.sh
 
 # Create a systemd service for settings server
 mkdir -p /usr/lib/systemd/system/
@@ -226,11 +221,6 @@ EOF
 # Enable and start the service
 systemctl enable tooloop-settings-server
 systemctl start tooloop-settings-server
-
-# Get bundled packages
-# git clone --single-branch --branch appcenter https://github.com/Tooloop/Tooloop-Packages.git /assets/packages
-# mkdir -p /assets/packages/metainfo
-
 
 # Create a systemd service for the VNC server
 cat > /usr/lib/systemd/user/x11vnc.service <<EOF
@@ -261,6 +251,36 @@ usermod -aG dialout tooloop
 cat > /etc/udev/rules.d/75-permissions-enttec.rules <<EOF
 SUBSYSTEM=="usb", ACTION=="add|change", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", "MODE="0666"
 EOF
+
+
+
+# Create local deb repository
+mkdir -p /assets/packages/metainfo/
+mkdir -p /assets/packages/conf/
+cat > /assets/packages/conf/distributions <<EOF
+Origin: Tooloop_Local_repo
+Label: Tooloop_Local_Repo
+Codename: bionic
+Architectures: i386 amd64
+Components: main
+Description: Local repository for Tooloop presentations and addons
+EOF
+
+# Add to apt source list
+echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+
+# Stop apt from removing empty folders when uninstalling stuff
+touch /assets/data/.keep
+touch /assets/presentation/.keep
+touch /opt/tooloop/settings-server/installed_app/.keep
+
+# Get bundled packages
+# TODO: download release from github
+# For now:
+git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
+cd /home/tooloop/Tooloop-Packages
+./build
+./update-packages
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
