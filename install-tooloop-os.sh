@@ -172,7 +172,7 @@ cp -R "$SCRIPT_PATH"/files/openbox-config/* /home/tooloop/.config/openbox/
 
 # Copy Openbox menu icons
 mkdir -p /home/tooloop/.config/openbox-menu-icons
-cp -R "$SCRIPT_PATH"/files/openbox-menu-icons/* /home/tooloop/.config/icons/
+cp -R "$SCRIPT_PATH"/files/openbox-menu-icons/* /home/tooloop/.config/openbox-menu-icons/
 
 # Copy start- and stop-presentation scripts
 cp "$SCRIPT_PATH"/files/start-presentation.sh /assets/presentation/
@@ -196,7 +196,8 @@ BindsTo=graphical-session.target
 EOF
 
 # Get settings server
-git clone https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
+# TODO: remove branch when merging
+git clone --single-branch --branch appcenter https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
 
 # Install dependencies
 /bin/bash /opt/tooloop/settings-server/install-dependencies.sh
