@@ -158,6 +158,13 @@ cat >/etc/sysctl.d/20-quiet-printk.conf <<EOF
 kernel.printk = 3 3 3 3
 EOF
 
+# Disable wait-online service to prevent the system from waiting on a network connection
+# this will disable the following services:
+# open-iscsi.service cloud-final.service cloud-config.service iscsid.service
+# https://askubuntu.com/questions/972215/a-start-job-is-running-for-wait-for-network-to-be-configured-ubuntu-server-17-1
+systemctl disable systemd-networkd-wait-online.service
+systemctl mask systemd-networkd-wait-online.service
+
 # Copy bash config
 cp "$SCRIPT_PATH"/files/bashrc /home/tooloop/.bashrc
 chown tooloop:tooloop /home/tooloop/.bashrc
