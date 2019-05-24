@@ -62,6 +62,7 @@ apt install -y --no-install-recommends \
   hsetroot \
   scrot \
   git \
+  zip \
   unzip \
   make \
   gcc \
@@ -158,8 +159,8 @@ cat >/etc/sysctl.d/20-quiet-printk.conf <<EOF
 kernel.printk = 3 3 3 3
 EOF
 
-# Disable wait-online service to prevent the system from waiting on a network connection
-# this will disable the following services:
+# Disable wait-online service to prevent the system from waiting forever on a 
+# network connection. This will disable the following services:
 # open-iscsi.service cloud-final.service cloud-config.service iscsid.service
 # https://askubuntu.com/questions/972215/a-start-job-is-running-for-wait-for-network-to-be-configured-ubuntu-server-17-1
 systemctl disable systemd-networkd-wait-online.service
@@ -193,15 +194,6 @@ mkdir -p /opt/tooloop
 cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
-# Create a systemd target for Xorg
-# info here: https://superuser.com/a/1128905
-mkdir -p /usr/lib/systemd/user
-cat > /usr/lib/systemd/user/xsession.target <<EOF
-[Unit]
-Description=XSession
-BindsTo=graphical-session.target
-EOF
-
 # Get settings server
 # TODO: remove branch when merging
 git clone --single-branch --branch appcenter https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
@@ -223,12 +215,21 @@ ExecStart=/usr/bin/python /opt/tooloop/settings-server/tooloop-settings-server.p
 Restart=always
 
 [Install]
-WantedBy=xsession.target
+WantedBy=graphical.target
 EOF
 
 # Enable and start the service
 systemctl enable tooloop-settings-server
 systemctl start tooloop-settings-server
+
+# Create a systemd target for Xorg
+# info here: https://superuser.com/a/1128905
+mkdir -p /usr/lib/systemd/user
+cat > /usr/lib/systemd/user/xsession.target <<EOF
+[Unit]
+Description=XSession
+BindsTo=graphical-session.target
+EOF
 
 # Create a systemd service for the VNC server
 cat > /usr/lib/systemd/user/x11vnc.service <<EOF
@@ -260,10 +261,8 @@ cat > /etc/udev/rules.d/75-permissions-enttec.rules <<EOF
 SUBSYSTEM=="usb", ACTION=="add|change", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", "MODE="0666"
 EOF
 
-
-
 # Create local deb repository
-mkdir -p /assets/packages/metainfo/
+mkdir -p /assets/packages/media/
 mkdir -p /assets/packages/conf/
 cat > /assets/packages/conf/distributions <<EOF
 Origin: Tooloop_Local_repo
