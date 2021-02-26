@@ -286,13 +286,7 @@ touch /opt/tooloop/settings-server/installed_app/.keep
 # For now:
 git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
 cd /home/tooloop/Tooloop-Packages
-<<<<<<< HEAD
-./build
-./update-packages
-=======
 ./build.sh
-#./update-packages
->>>>>>> 1096cd7... Fixed the missing .sh in install script line 289 './build' to './build.sh'
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
