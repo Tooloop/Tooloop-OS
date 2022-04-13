@@ -48,34 +48,35 @@ echo " "
 
 # Install base packages
 apt install -y --no-install-recommends \
-  xorg \
-  x11-xserver-utils \
-  openbox \
-  obmenu \
-  obconf \
-  chromium-browser \
-  ssh \
-  x11vnc \
-  pulseaudio \
-  pavucontrol \
-  unclutter \
-  hsetroot \
-  scrot \
-  git \
-  zip \
-  unzip \
-  make \
-  gcc \
-  curl \
-  htop \
-  vainfo \
   augeas-doc \
   augeas-lenses \
   augeas-tools \
   bash-completion \
+  chromium-browser \
+  curl \
+  gcc \
+  git \
+  hsetroot \
+  htop \
+  make \
   nano \
+  obconf \
+  openbox \
+  pavucontrol \
+  pcregrep \
   psmisc \
-  pcregrep
+  pulseaudio \
+  scrot \
+  ssh \
+  unclutter-xfixes \
+  unzip \
+  vainfo \
+  x11-xserver-utils \
+  x11vnc \
+  xorg \
+  xterm \
+  zip
+
 
 # ------------------------------------------------------------------------------
 # Config
@@ -106,8 +107,10 @@ EOF
 
 # Create the /assets folder sctructure
 mkdir -p /assets/addons
+mkdir -p /assets/apps
 mkdir -p /assets/data
 mkdir -p /assets/logs
+mkdir -p /assets/packages
 mkdir -p /assets/presentation
 mkdir -p /assets/screenshots
 
@@ -140,7 +143,7 @@ cat >/etc/issue.net <<EOF
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
                                                          |
-                  Tooloop OS 0.9 alpha  |  Ubuntu 18.04  |
+                              based on Ubuntu 22.04 LTS  |
 
 
 Hint: There's a bunch of convenient aliases starting with tooloop-...
@@ -195,15 +198,14 @@ cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
 # Get settings server
-# TODO: remove branch when merging
-git clone --single-branch --branch appcenter https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
+git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
 
 # Install dependencies
-/bin/bash /opt/tooloop/settings-server/install-dependencies.sh
+/bin/bash /opt/tooloop/control-center/install-dependencies.sh
 
 # Create a systemd service for settings server
 mkdir -p /usr/lib/systemd/system/
-cat > /usr/lib/systemd/system/tooloop-settings-server.service <<EOF
+cat > /usr/lib/systemd/system/tooloop-control.service <<EOF
 [Unit]
 Description=Tooloop settings server
 After=network.target
@@ -211,7 +213,7 @@ After=network.target
 [Service]
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/tooloop/.Xauthority
-ExecStart=/usr/bin/python /opt/tooloop/settings-server/tooloop-settings-server.py
+ExecStart=/usr/bin/python /opt/tooloop/control-center/tooloop-settings-server.py
 Restart=always
 
 [Install]
@@ -279,7 +281,7 @@ echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sourc
 # Stop apt from removing empty folders when uninstalling stuff
 touch /assets/data/.keep
 touch /assets/presentation/.keep
-touch /opt/tooloop/settings-server/installed_app/.keep
+touch /opt/tooloop/control-center/installed_app/.keep
 
 # Get bundled packages
 # TODO: download release from github
