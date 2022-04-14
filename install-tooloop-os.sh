@@ -51,6 +51,7 @@ apt install -y --no-install-recommends \
   augeas-doc \
   augeas-lenses \
   augeas-tools \
+  avahi-daemon \
   bash-completion \
   chromium-browser \
   curl \
@@ -58,8 +59,10 @@ apt install -y --no-install-recommends \
   git \
   hsetroot \
   htop \
+  libnss-mdns \
   make \
   nano \
+  netatalk \
   obconf \
   openbox \
   pavucontrol \
@@ -295,6 +298,23 @@ cd /home/tooloop/Tooloop-Packages
 chown -R tooloop:tooloop /assets/
 chown -R tooloop:tooloop /home/tooloop/
 chown -R tooloop:tooloop /opt/tooloop/
+
+# Configure netatalk so we can see the assets and home folders on a Macs Finder
+cat > /etc/netatalk/afp.conf <<EOF
+;
+; Netatalk 3.x configuration file
+;
+
+[Global]
+; Global server settings
+
+[Homes]
+basedir regex = /home
+
+[Assets]
+path = /assets
+EOF
+
 
 
 echo " "
