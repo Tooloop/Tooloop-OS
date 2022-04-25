@@ -206,7 +206,7 @@ git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-ce
 # Install dependencies
 /bin/bash /opt/tooloop/control-center/install-dependencies.sh
 
-# Create a systemd service for settings server
+# Create a systemd service for control center
 mkdir -p /usr/lib/systemd/system/
 cat > /usr/lib/systemd/system/tooloop-control.service <<EOF
 [Unit]
@@ -216,7 +216,7 @@ After=network.target
 [Service]
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/tooloop/.Xauthority
-ExecStart=/usr/bin/python /opt/tooloop/control-center/tooloop-settings-server.py
+ExecStart=/usr/bin/python /opt/tooloop/control-center/app.py
 Restart=always
 
 [Install]
@@ -315,6 +315,22 @@ basedir regex = /home
 path = /assets
 EOF
 
+# Publish services over Avahi/Bonjour
+
+cp /usr/share/doc/avahi-daemon/examples/sftp-ssh.service /etc/avahi/services
+cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services
+
+cat > /etc/avahi/services/vnc.service <<EOF
+<?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<service-group>
+ <name replace-wildcards="yes">%h</name>
+ <service>
+ <type>_rfb._tcp</type>
+ <port>5900</port>
+ </service>
+</service-group>
+EOF
 
 
 echo " "
