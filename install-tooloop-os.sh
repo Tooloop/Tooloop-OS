@@ -48,6 +48,7 @@ echo " "
 
 # Install base packages
 apt install -y --no-install-recommends \
+  arandr \
   augeas-doc \
   augeas-lenses \
   augeas-tools \
@@ -137,8 +138,6 @@ EOF
 cat >/etc/issue.net <<EOF
 
 
-
-
      |                         |
    --|--     _____     _____   |       _____     _____     _____
      |      /     \   /     \  |      /     \   /     \   /     \\
@@ -200,7 +199,7 @@ mkdir -p /opt/tooloop
 cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
-# Get settings server
+# Get control center
 git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
 
 # Install dependencies
@@ -210,7 +209,7 @@ git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-ce
 mkdir -p /usr/lib/systemd/system/
 cat > /usr/lib/systemd/system/tooloop-control.service <<EOF
 [Unit]
-Description=Tooloop settings server
+Description=Tooloop control center
 After=network.target
 
 [Service]
@@ -224,8 +223,8 @@ WantedBy=graphical.target
 EOF
 
 # Enable and start the service
-systemctl enable tooloop-settings-server
-systemctl start tooloop-settings-server
+systemctl enable tooloop-control
+systemctl start tooloop-control
 
 # Create a systemd target for Xorg
 # info here: https://superuser.com/a/1128905
@@ -272,7 +271,7 @@ mkdir -p /assets/packages/conf/
 cat > /assets/packages/conf/distributions <<EOF
 Origin: Tooloop_Local_repo
 Label: Tooloop_Local_Repo
-Codename: bionic
+Codename: jammy
 Architectures: i386 amd64
 Components: main
 Description: Local repository for Tooloop presentations and addons
