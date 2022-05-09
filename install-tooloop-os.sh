@@ -203,7 +203,7 @@ chmod +x /opt/tooloop/scripts/*
 git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
 
 # Install dependencies
-/bin/bash /opt/tooloop/control-center/install-dependencies.sh
+/bin/bash /opt/tooloop/control-center/install.sh
 
 # Create a systemd service for control center
 mkdir -p /usr/lib/systemd/system/
@@ -215,7 +215,7 @@ After=network.target
 [Service]
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/tooloop/.Xauthority
-ExecStart=/usr/bin/python /opt/tooloop/control-center/app.py
+ExecStart=/opt/tooloop/control-center/venv/bin/python /opt/tooloop/control-center/app.py
 Restart=always
 
 [Install]
