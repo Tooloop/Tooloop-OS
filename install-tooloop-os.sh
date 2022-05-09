@@ -291,8 +291,8 @@ touch /opt/tooloop/control-center/installed_app/.keep
 # For now:
 git clone --single-branch -b 22.04 https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
 cd /home/tooloop/Tooloop-Packages
-./build
-./update-packages
+./build.sh
+./deploy.sh
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
