@@ -72,6 +72,7 @@ apt install -y --no-install-recommends \
   pulseaudio \
   scrot \
   ssh \
+  unclutter-startup \
   unclutter-xfixes \
   unzip \
   vainfo \
