@@ -119,6 +119,10 @@ mkdir -p /assets/packages
 mkdir -p /assets/presentation
 mkdir -p /assets/screenshots
 
+# Mount /assets folder to /media/assets so snaps have access to it
+# https://askubuntu.com/questions/1228899/how-to-access-files-outside-of-home-in-snap-apps
+mkdir /media/assets
+echo "/assets /media/assets none bind,rw 0 0" | tee -a /etc/fstab
 
 # Silent boot
 augtool<<EOF
