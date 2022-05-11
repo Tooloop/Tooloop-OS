@@ -111,8 +111,6 @@ ExecStart=/sbin/agetty --skip-login --noissue --autologin "tooloop" %I
 EOF
 
 # Create the /assets folder sctructure
-mkdir -p /assets/addons
-mkdir -p /assets/apps
 mkdir -p /assets/data
 mkdir -p /assets/logs
 mkdir -p /assets/packages
