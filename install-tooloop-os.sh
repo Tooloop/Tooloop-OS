@@ -72,6 +72,7 @@ apt install -y --no-install-recommends \
   pulseaudio \
   scrot \
   ssh \
+  unclutter-startup \
   unclutter-xfixes \
   unzip \
   vainfo \
@@ -116,6 +117,10 @@ mkdir -p /assets/packages
 mkdir -p /assets/presentation
 mkdir -p /assets/screenshots
 
+# Mount /assets folder to /media/assets so snaps have access to it
+# https://askubuntu.com/questions/1228899/how-to-access-files-outside-of-home-in-snap-apps
+mkdir /media/assets
+echo "/assets /media/assets none bind,rw 0 0" | tee -a /etc/fstab
 
 # Silent boot
 augtool<<EOF
@@ -288,8 +293,8 @@ touch /opt/tooloop/control-center/installed_app/.keep
 # For now:
 git clone --single-branch -b 22.04 https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
 cd /home/tooloop/Tooloop-Packages
-./build
-./update-packages
+./build.sh
+./deploy.sh
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/

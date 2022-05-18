@@ -29,7 +29,7 @@
             </item>
             <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_terminal.png" label="Terminal">
                 <action name="Execute">
-                    <execute>gnome-terminal</execute>
+                    <execute>xterm</execute>
                 </action>
             </item>
             <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_browser.png" label="Browser">
