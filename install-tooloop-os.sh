@@ -110,8 +110,6 @@ ExecStart=/sbin/agetty --skip-login --noissue --autologin "tooloop" %I
 EOF
 
 # Create the /assets folder sctructure
-mkdir -p /assets/addons
-mkdir -p /assets/apps
 mkdir -p /assets/data
 mkdir -p /assets/logs
 mkdir -p /assets/packages
@@ -269,10 +267,10 @@ EOF
 mkdir -p /assets/packages/media/
 mkdir -p /assets/packages/conf/
 cat > /assets/packages/conf/distributions <<EOF
-Origin: Tooloop_Local_repo
+Origin: Tooloop_Local_Repo
 Label: Tooloop_Local_Repo
 Codename: jammy
-Architectures: i386 amd64
+Architectures: amd64
 Components: main
 Description: Local repository for Tooloop presentations and addons
 EOF
