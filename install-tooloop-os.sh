@@ -290,8 +290,8 @@ touch /opt/tooloop/control-center/installed_app/.keep
 
 # Get bundled packages
 # TODO: download release from github
-# For now:
-git clone --single-branch -b 22.04 https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
+# https://github.com/Tooloop/Tooloop-Packages/issues/2
+git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
 cd /home/tooloop/Tooloop-Packages
 ./build.sh
 ./deploy.sh
