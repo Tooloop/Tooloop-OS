@@ -9,13 +9,17 @@ echo '    </item>'
 
 NVIDIA_INSTALLED="$(which nvidia-settings)"
 if [ "${NVIDIA_INSTALLED}" != "" ]; then
-
     echo '    <item icon="/home/tooloop/.config/icons/menu_icon_nvidia.png" label="Nvidia settings">'
     echo '        <action name="Execute">'
     echo '            <execute>/usr/bin/nvidia-settings</execute>'
     echo '        </action>'
     echo '    </item>'
-
+else
+    echo '    <item icon="/home/tooloop/.config/icons/menu_icon_nvidia.png" label="Display settings">'
+    echo '        <action name="Execute">'
+    echo '            <execute>arandr</execute>'
+    echo '        </action>'
+    echo '    </item>'
 fi
 
 echo '<item icon="/home/tooloop/.config/icons/menu_icon_volume.png" label="Audio volume">'

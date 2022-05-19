@@ -48,32 +48,40 @@ echo " "
 
 # Install base packages
 apt install -y --no-install-recommends \
-  xorg \
-  x11-xserver-utils \
-  openbox \
-  obmenu \
-  obconf \
-  chromium-browser \
-  ssh \
-  x11vnc \
-  pulseaudio \
-  pavucontrol \
-  unclutter \
-  scrot \
-  git \
-  unzip \
-  make \
-  gcc \
-  curl \
-  htop \
-  vainfo \
+  arandr \
   augeas-doc \
   augeas-lenses \
   augeas-tools \
+  avahi-daemon \
   bash-completion \
+  chromium-browser \
+  curl \
+  gcc \
+  git \
+  hsetroot \
+  htop \
+  libnss-mdns \
+  make \
   nano \
+  netatalk \
+  obconf \
+  openbox \
+  pavucontrol \
+  pcregrep \
   psmisc \
-  pcregrep
+  pulseaudio \
+  scrot \
+  ssh \
+  unclutter-startup \
+  unclutter-xfixes \
+  unzip \
+  vainfo \
+  x11-xserver-utils \
+  x11vnc \
+  xorg \
+  xterm \
+  zip
+
 
 # ------------------------------------------------------------------------------
 # Config
@@ -103,18 +111,22 @@ ExecStart=/sbin/agetty --skip-login --noissue --autologin "tooloop" %I
 EOF
 
 # Create the /assets folder sctructure
-mkdir -p /assets/presentation
 mkdir -p /assets/data
-mkdir -p /assets/screenshots
 mkdir -p /assets/logs
-mkdir -p /assets/apps
+mkdir -p /assets/packages
+mkdir -p /assets/presentation
+mkdir -p /assets/screenshots
+
+# Mount /assets folder to /media/assets so snaps have access to it
+# https://askubuntu.com/questions/1228899/how-to-access-files-outside-of-home-in-snap-apps
+mkdir /media/assets
+echo "/assets /media/assets none bind,rw 0 0" | tee -a /etc/fstab
 
 # Silent boot
 augtool<<EOF
 set /files/etc/default/grub/GRUB_DEFAULT 0
 set /files/etc/default/grub/GRUB_TIMEOUT 0
-set /files/etc/default/grub/GRUB_CMDLINE_LINUX \""console=tty12\""
-set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT \""quiet loglevel=3 vga=current rd.systemd.show_status=false rd.udev.log-priority=3\""
+set /files/etc/default/grub/GRUB_CMDLINE_LINUX_DEFAULT \""console=tty12 quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3\""
 save
 EOF
 
@@ -129,8 +141,6 @@ EOF
 cat >/etc/issue.net <<EOF
 
 
-
-
      |                         |
    --|--     _____     _____   |       _____     _____     _____
      |      /     \   /     \  |      /     \   /     \   /     \\
@@ -138,7 +148,7 @@ cat >/etc/issue.net <<EOF
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
                                                          |
-                  Tooloop OS 0.9 alpha  |  Ubuntu 16.04  |
+                              based on Ubuntu 22.04 LTS  |
 
 
 Hint: There's a bunch of convenient aliases starting with tooloop-...
@@ -157,6 +167,13 @@ cat >/etc/sysctl.d/20-quiet-printk.conf <<EOF
 kernel.printk = 3 3 3 3
 EOF
 
+# Disable wait-online service to prevent the system from waiting forever on a 
+# network connection. This will disable the following services:
+# open-iscsi.service cloud-final.service cloud-config.service iscsid.service
+# https://askubuntu.com/questions/972215/a-start-job-is-running-for-wait-for-network-to-be-configured-ubuntu-server-17-1
+systemctl disable systemd-networkd-wait-online.service
+systemctl mask systemd-networkd-wait-online.service
+
 # Copy bash config
 cp "$SCRIPT_PATH"/files/bashrc /home/tooloop/.bashrc
 chown tooloop:tooloop /home/tooloop/.bashrc
@@ -170,8 +187,8 @@ mkdir -p /home/tooloop/.config/openbox
 cp -R "$SCRIPT_PATH"/files/openbox-config/* /home/tooloop/.config/openbox/
 
 # Copy Openbox menu icons
-mkdir -p /home/tooloop/.config/icons
-cp -R "$SCRIPT_PATH"/files/openbox-menu-icons/* /home/tooloop/.config/icons/
+mkdir -p /home/tooloop/.config/openbox-menu-icons
+cp -R "$SCRIPT_PATH"/files/openbox-menu-icons/* /home/tooloop/.config/openbox-menu-icons/
 
 # Copy start- and stop-presentation scripts
 cp "$SCRIPT_PATH"/files/start-presentation.sh /assets/presentation/
@@ -185,23 +202,23 @@ mkdir -p /opt/tooloop
 cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
-# Get settings server
-git clone https://github.com/vollstock/Tooloop-Settings-Server.git /opt/tooloop/settings-server
+# Get control center
+git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
 
 # Install dependencies
-/bin/bash /opt/tooloop/settings-server/install-dependencies.sh
+/bin/bash /opt/tooloop/control-center/install.sh
 
-# Create a systemd service for settings server
+# Create a systemd service for control center
 mkdir -p /usr/lib/systemd/system/
-cat > /usr/lib/systemd/system/tooloop-settings-server.service <<EOF
+cat > /usr/lib/systemd/system/tooloop-control.service <<EOF
 [Unit]
-Description=Tooloop settings server
+Description=Tooloop control center
 After=network.target
 
 [Service]
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/tooloop/.Xauthority
-ExecStart=/usr/bin/python /opt/tooloop/settings-server/tooloop-settings-server.py
+ExecStart=/opt/tooloop/control-center/venv/bin/python /opt/tooloop/control-center/app.py
 Restart=always
 
 [Install]
@@ -209,11 +226,8 @@ WantedBy=graphical.target
 EOF
 
 # Enable and start the service
-systemctl enable tooloop-settings-server
-systemctl start tooloop-settings-server
-
-# Get example apps
-git clone https://github.com/vollstock/Tooloop-Examples.git /assets/apps
+systemctl enable tooloop-control
+systemctl start tooloop-control
 
 # Create a systemd target for Xorg
 # info here: https://superuser.com/a/1128905
@@ -254,10 +268,71 @@ cat > /etc/udev/rules.d/75-permissions-enttec.rules <<EOF
 SUBSYSTEM=="usb", ACTION=="add|change", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", "MODE="0666"
 EOF
 
+# Create local deb repository
+mkdir -p /assets/packages/media/
+mkdir -p /assets/packages/conf/
+cat > /assets/packages/conf/distributions <<EOF
+Origin: Tooloop_Local_Repo
+Label: Tooloop_Local_Repo
+Codename: jammy
+Architectures: amd64
+Components: main
+Description: Local repository for Tooloop presentations and addons
+EOF
+
+# Add to apt source list
+echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+
+# Stop apt from removing empty folders when uninstalling stuff
+touch /assets/data/.keep
+touch /assets/presentation/.keep
+touch /opt/tooloop/control-center/installed_app/.keep
+
+# Get bundled packages
+# TODO: download release from github
+# https://github.com/Tooloop/Tooloop-Packages/issues/2
+git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
+cd /home/tooloop/Tooloop-Packages
+./build.sh
+./deploy.sh
+
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
 chown -R tooloop:tooloop /home/tooloop/
 chown -R tooloop:tooloop /opt/tooloop/
+
+# Configure netatalk so we can see the assets and home folders on a Macs Finder
+cat > /etc/netatalk/afp.conf <<EOF
+;
+; Netatalk 3.x configuration file
+;
+
+[Global]
+; Global server settings
+
+[Homes]
+basedir regex = /home
+
+[Assets]
+path = /assets
+EOF
+
+# Publish services over Avahi/Bonjour
+
+cp /usr/share/doc/avahi-daemon/examples/sftp-ssh.service /etc/avahi/services
+cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services
+
+cat > /etc/avahi/services/vnc.service <<EOF
+<?xml version="1.0" standalone='no'?><!--*-nxml-*-->
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<service-group>
+ <name replace-wildcards="yes">%h</name>
+ <service>
+ <type>_rfb._tcp</type>
+ <port>5900</port>
+ </service>
+</service-group>
+EOF
 
 
 echo " "

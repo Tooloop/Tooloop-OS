@@ -1,8 +1,25 @@
 # Set black background
-xsetroot -solid "#000000" &
+hsetroot -solid "#000000" &
 
 # Set resolution
 # xrandr --output <YOUR_DISPLAY> --mode <RESOLUTION>  --rate <REFRESHRATE> &
+
+# Rotate screen (if not done in xorg.conf)
+# xrandr --orientation normal &
+# xrandr --orientation left &
+# xrandr --orientation right &
+# xrandr --orientation inverted &
+
+# Rotate touch input, find device using 'xinput list'
+# See https://wiki.ubuntu.com/X/InputCoordinateTransformation
+# normal
+# xinput set-prop 'Pixart Imaging, Inc. Optical Touch' 'Coordinate Transformation Matrix' 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1 &
+# left
+# xinput set-prop 'Pixart Imaging, Inc. Optical Touch' 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1 &
+# right
+# xinput set-prop 'Pixart Imaging, Inc. Optical Touch' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1 &
+# inverted
+# xinput set-prop <DEVICE> 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1 &
 
 # Start pulseaudio server
 pulseaudio --start
