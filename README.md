@@ -1,8 +1,10 @@
 # Tooloop OS
 
-![](https://img.shields.io/badge/status-kinda%20works-blue.svg)
-![](https://img.shields.io/github/license/tooloop/tooloop-os.svg)
+![](https://img.shields.io/badge/status-kinda%20works-blue)
+![](https://img.shields.io/github/license/Tooloop/Tooloop-OS)
+[![Matrix](https://img.shields.io/matrix/tooloop-os:matrix.org?label=Chat&logo=matrix)](https://matrix.to/#/%23tooloop-os:matrix.org)
 
+![tooloop-logo](https://user-images.githubusercontent.com/4962676/169491947-b66f02e3-7a0b-4df1-9ac8-969760c730c0.png)
 
 # About
 
@@ -41,6 +43,7 @@ Please check out [the project website](http://tooloop.org) if you want to learn 
 Help is very much welcome! If you want to have a look, install it in a virtual machine. Even better, if you have spare hardware or a project ongoing, use it and share your experience!
 
 Open an issue here if you want to discuss ideas or changes.  
+You're also very welcome in the [Tooloop OS Matrix chat room](https://matrix.to/#/%23tooloop-os:matrix.org).
 
 
 # Installation
