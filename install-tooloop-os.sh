@@ -72,6 +72,7 @@ apt install -y --no-install-recommends \
   pulseaudio \
   scrot \
   ssh \
+  tree \
   unclutter-startup \
   unclutter-xfixes \
   unzip \
