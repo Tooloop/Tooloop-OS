@@ -11,7 +11,7 @@ hsetroot -solid "#000000" &
 # xrandr --orientation inverted &
 
 # Rotate touch input, find device using 'xinput list'
-# See https://wiki.ubuntu.com/X/InputCoordinateTransformation
+# See http://tooloop.org/Cookbook/Touch%20Input%20Mapping
 # normal
 # xinput set-prop 'Pixart Imaging, Inc. Optical Touch' 'Coordinate Transformation Matrix' 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1 &
 # left
@@ -23,6 +23,9 @@ hsetroot -solid "#000000" &
 
 # Start pulseaudio server
 pulseaudio --start
+
+# Start compositor
+picom &
 
 # Start your presentation
 /bin/bash /assets/presentation/start-presentation.sh &
