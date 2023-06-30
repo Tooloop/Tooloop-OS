@@ -24,9 +24,6 @@ hsetroot -solid "#000000" &
 # Start pulseaudio server
 pulseaudio --start
 
-# Start compositor
-picom &
-
 # Start your presentation
 /bin/bash /assets/presentation/start-presentation.sh &
 

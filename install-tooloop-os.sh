@@ -68,7 +68,6 @@ apt install -y --no-install-recommends \
   openbox \
   pavucontrol \
   pcregrep \
-  picom \
   psmisc \
   pulseaudio \
   scrot \
