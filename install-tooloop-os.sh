@@ -22,6 +22,9 @@ if [ $EUID != 0 ]; then
     exit 1
 fi
 
+# Set restart mode to list only so the installations can run unattended
+sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'l';/" /etc/needrestart/needrestart.conf
+
 
 # ------------------------------------------------------------------------------
 # Update
