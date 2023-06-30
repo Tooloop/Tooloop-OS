@@ -319,7 +319,6 @@ path = /assets
 EOF
 
 # Publish services over Avahi/Bonjour
-
 cp /usr/share/doc/avahi-daemon/examples/sftp-ssh.service /etc/avahi/services
 cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services
 
@@ -334,6 +333,12 @@ cat > /etc/avahi/services/vnc.service <<EOF
  </service>
 </service-group>
 EOF
+
+# Enable wake on lan for all ethernet interfaces
+for i in $(ls /sys/class/net/ | grep en)
+do
+    netplan set network.ethernets.$i.wakeonlan=true
+done
 
 
 echo " "
