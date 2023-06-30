@@ -37,11 +37,6 @@
                     <execute>chromium-browser</execute>
                 </action>
             </item>
-            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_install.png" label="Install stuff">
-                <action name="Execute">
-                    <execute>gnome-terminal -t &quot;Install stuff&quot; --hide-menubar -- sudo tooloop-install-optional-stuff</execute>
-                </action>
-            </item>
         </menu>
 
         <separator/>
