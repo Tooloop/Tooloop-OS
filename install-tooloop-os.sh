@@ -179,9 +179,6 @@ systemctl mask systemd-networkd-wait-online.service
 cp "$SCRIPT_PATH"/files/bashrc /home/tooloop/.bashrc
 chown tooloop:tooloop /home/tooloop/.bashrc
 
-# Copy picom config
-cp "$SCRIPT_PATH"/files/picom.conf /etc/xdg/picom.conf
-
 # Copy Openbox theme
 cp -R "$SCRIPT_PATH"/files/openbox-theme/* /usr/share/themes/
 
