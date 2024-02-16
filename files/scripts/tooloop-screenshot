@@ -2,9 +2,12 @@
 
 # 2017-02-06T09:52:55+0100
 ISO_DATE=$(date --iso-8601=seconds)
-# 2017-02-06T09:52:55+01:00
-#ISO_DATE=${ISO_DATE:0:22}:${ISO_DATE:22}
+FILE="/assets/screenshots/$ISO_DATE.jpg"
 
-scrot --silent "/assets/screenshots/$ISO_DATE.jpg" --quality 95 --thumb 20
+if ! test -f $FILE; then
+    scrot --silent "/assets/screenshots/$ISO_DATE.jpg" --quality 95 --thumb 20
+else
+    echo "exists"
+fi
 
 exit 0
