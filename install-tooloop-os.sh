@@ -59,8 +59,10 @@ apt install -y --no-install-recommends \
   bash-completion \
   chromium-browser \
   curl \
+  dpkg-dev \
   gcc \
   git \
+  git-lfs \
   hsetroot \
   htop \
   libnss-mdns \
