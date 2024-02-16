@@ -152,7 +152,7 @@ cat >/etc/issue.net <<EOF
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
                                                          |
-                              based on Ubuntu 22.04 LTS  |
+                              based on Ubuntu 24.04 LTS  |
 
 
 Hint: There's a bunch of convenient aliases starting with tooloop-...
@@ -288,7 +288,9 @@ Description: Local repository for Tooloop presentations and addons
 EOF
 
 # Add to apt source list
-echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+if ! grep -q file:/assets/packages /etc/apt/sources.list; then
+  echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+fi
 
 # Stop apt from removing empty folders when uninstalling stuff
 touch /assets/data/.keep
