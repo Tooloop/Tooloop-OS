@@ -307,6 +307,9 @@ cd /home/tooloop/Tooloop-Packages
 ./build.sh
 ./deploy.sh
 
+# Install Onboarding App
+apt install -y tooloop-onboarding
+
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
 chown -R tooloop:tooloop /home/tooloop/
