@@ -259,11 +259,14 @@ SuccessExitStatus=3
 WantedBy=xsession.target
 EOF
 
-# Create a cronjob to take a screenshot every minute
-(crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
 
-# Create a cronjob to clean up screenshots every day at 00:00
-(crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
+# Create a cronjob to take a screenshot every minute
+# and one to clean up screenshots every day at 00:00
+if ! crontab -u tooloop -l | grep -q tooloop-screenshot; then
+  (crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
+  (crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
+fi
+
 
 # make Enttec USB DMX devices accessable to the tooloop user
 usermod -aG tty tooloop
