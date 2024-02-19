@@ -59,8 +59,10 @@ apt install -y --no-install-recommends \
   bash-completion \
   chromium-browser \
   curl \
+  dpkg-dev \
   gcc \
   git \
+  git-lfs \
   hsetroot \
   htop \
   libnss-mdns \
@@ -152,7 +154,7 @@ cat >/etc/issue.net <<EOF
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
                                                          |
-                              based on Ubuntu 22.04 LTS  |
+                              based on Ubuntu 24.04 LTS  |
 
 
 Hint: There's a bunch of convenient aliases starting with tooloop-...
@@ -259,11 +261,14 @@ SuccessExitStatus=3
 WantedBy=xsession.target
 EOF
 
-# Create a cronjob to take a screenshot every minute
-(crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
 
-# Create a cronjob to clean up screenshots every day at 00:00
-(crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
+# Create a cronjob to take a screenshot every minute
+# and one to clean up screenshots every day at 00:00
+if ! crontab -u tooloop -l | grep -q tooloop-screenshot; then
+  (crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
+  (crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
+fi
+
 
 # make Enttec USB DMX devices accessable to the tooloop user
 usermod -aG tty tooloop
@@ -285,7 +290,9 @@ Description: Local repository for Tooloop presentations and addons
 EOF
 
 # Add to apt source list
-echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+if ! grep -q file:/assets/packages /etc/apt/sources.list; then
+  echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+fi
 
 # Stop apt from removing empty folders when uninstalling stuff
 touch /assets/data/.keep
@@ -299,6 +306,9 @@ git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-
 cd /home/tooloop/Tooloop-Packages
 ./build.sh
 ./deploy.sh
+
+# Install Onboarding App
+apt install -y tooloop-onboarding
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
