@@ -3,7 +3,7 @@
 echo '<openbox_pipe_menu>'
 echo '    <item icon="/home/tooloop/.config/icons/menu_icon_system_settings.png" label="System settings">'
 echo '        <action name="Execute">'
-echo '            <execute>chromium-browser --app=http://localhost</execute>'
+echo '            <execute>chromium --disable-features=Translate,Infobars --no-default-browser-check --no-first-run --class="Tooloop Control" --temp-profile --app=http://localhost</execute>'
 echo '        </action>'
 echo '    </item>'
 
