@@ -196,10 +196,6 @@ cp -R "$SCRIPT_PATH"/files/openbox-config/* /home/tooloop/.config/openbox/
 mkdir -p /home/tooloop/.config/openbox-menu-icons
 cp -R "$SCRIPT_PATH"/files/openbox-menu-icons/* /home/tooloop/.config/openbox-menu-icons/
 
-# Copy start- and stop-presentation scripts
-cp "$SCRIPT_PATH"/files/start-presentation.sh /assets/presentation/
-cp "$SCRIPT_PATH"/files/stop-presentation.sh /assets/presentation/
-
 # Copy Clear Sans font
 cp -R "$SCRIPT_PATH"/include/clearsans /usr/share/fonts/truetype
 
@@ -209,7 +205,7 @@ cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
 # Get control center
-git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
+git clone --branch dev https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
 
 # Install dependencies
 /bin/bash /opt/tooloop/control-center/install.sh
@@ -302,13 +298,13 @@ touch /opt/tooloop/control-center/installed_app/.keep
 # Get bundled packages
 # TODO: download release from github
 # https://github.com/Tooloop/Tooloop-Packages/issues/2
-git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
+git clone --branch dev https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
 cd /home/tooloop/Tooloop-Packages
 ./build.sh
 ./deploy.sh
 
 # Install Onboarding App
-apt install -y tooloop-onboarding
+apt install -y --allow-unauthenticated tooloop-onboarding
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
