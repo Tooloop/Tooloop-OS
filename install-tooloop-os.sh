@@ -67,6 +67,7 @@ apt install -y --no-install-recommends \
   htop \
   libnss-mdns \
   make \
+  mousepad \
   nano \
   netatalk \
   obconf \
@@ -77,6 +78,7 @@ apt install -y --no-install-recommends \
   pulseaudio \
   scrot \
   ssh \
+  thunar \
   tree \
   unclutter-startup \
   unclutter-xfixes \

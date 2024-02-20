@@ -22,16 +22,6 @@
             id="tools-menu" 
             label="Tools ">
 
-            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_file_manager.png" label="File Manager ">
-                <action name="Execute">
-                    <execute></execute>
-                </action>
-            </item>
-            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_terminal.png" label="Terminal ">
-                <action name="Execute">
-                    <execute>xterm -fa 'Monospace' -fs 14</execute>
-                </action>
-            </item>
             <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_browser.png" label="Browser ">
                 <action name="Execute">
                     <execute>chromium --temp-profile</execute>
@@ -40,6 +30,21 @@
             <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_clock.png" label="Clock ">
                 <action name="Execute">
                     <execute>tooloop-clock</execute>
+                </action>
+            </item>
+            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_file_manager.png" label="File Manager ">
+                <action name="Execute">
+                    <execute>thunar</execute>
+                </action>
+            </item>
+            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_terminal.png" label="Terminal ">
+                <action name="Execute">
+                    <execute>xterm -fa 'Monospace' -fs 14</execute>
+                </action>
+            </item>
+            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_text_editor.png" label="Text Editor ">
+                <action name="Execute">
+                    <execute>mousepad</execute>
                 </action>
             </item>
         </menu>
