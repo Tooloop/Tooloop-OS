@@ -2,7 +2,7 @@
 <openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
     <menu id="root-menu" label="Openbox 3">
 
-        <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_start_presentation.png" label="Start presentation">
+        <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_start_presentation.png" label="Start presentation ">
             <action name="Execute">
                 <execute>/bin/bash /assets/presentation/start-presentation.sh</execute>
             </action>
@@ -20,33 +20,38 @@
         <menu
             icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_tools.png" 
             id="tools-menu" 
-            label="Tools">
+            label="Tools ">
 
-            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_clock.png" label="Clock">
+            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_file_manager.png" label="File Manager ">
                 <action name="Execute">
-                    <execute>tooloop-clock</execute>
+                    <execute></execute>
                 </action>
             </item>
-            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_terminal.png" label="Terminal">
+            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_terminal.png" label="Terminal ">
                 <action name="Execute">
-                    <execute>xterm</execute>
+                    <execute>xterm -fa 'Monospace' -fs 14</execute>
                 </action>
             </item>
-            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_browser.png" label="Browser">
+            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_browser.png" label="Browser ">
                 <action name="Execute">
                     <execute>chromium --temp-profile</execute>
+                </action>
+            </item>
+            <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_clock.png" label="Clock ">
+                <action name="Execute">
+                    <execute>tooloop-clock</execute>
                 </action>
             </item>
         </menu>
 
         <separator/>
 
-        <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_reboot.png" label="Reboot">
+        <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_reboot.png" label="Reboot ">
             <action name="Execute">
                 <execute>sudo reboot --no-wall</execute>
             </action>
         </item>
-        <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_power_off.png" label="Power off">
+        <item icon="/home/tooloop/.config/openbox-menu-icons/menu_icon_power_off.png" label="Power off ">
             <action name="Execute">
                 <execute>sudo poweroff --no-wall</execute>
             </action>
