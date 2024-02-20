@@ -84,6 +84,7 @@ apt install -y --no-install-recommends \
   vainfo \
   x11-xserver-utils \
   x11vnc \
+  xdotool \
   xorg \
   xterm \
   zip
