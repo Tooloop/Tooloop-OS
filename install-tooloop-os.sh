@@ -50,7 +50,7 @@ echo "-------------------------------------------------------------------------"
 echo " "
 
 # Install base packages
-apt install -y --no-install-recommends \
+apt install -y \
   arandr \
   augeas-doc \
   augeas-lenses \
