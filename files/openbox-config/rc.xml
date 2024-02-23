@@ -202,13 +202,22 @@
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
-    <keybind key="W-t">
+    <keybind key="W-e">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Terminal</name>
+          <name>Text editor</name>
         </startupnotify>
-        <command>xterm -fa 'Monospace' -fs 14</command>
+        <command>mousepad</command>
+      </action>
+    </keybind>
+    <keybind key="W-f">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>File manager</name>
+        </startupnotify>
+        <command>thunar</command>
       </action>
     </keybind>
     <keybind key="W-c">
@@ -232,6 +241,15 @@
     <keybind key="W-S-3">
       <action name="Execute">
         <command>tooloop-screenshot</command>
+      </action>
+    </keybind>
+    <keybind key="W-t">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Terminal</name>
+        </startupnotify>
+        <command>xterm -fa 'Monospace' -fs 14</command>
       </action>
     </keybind>
     <!-- Keybindings for window snapping -->
