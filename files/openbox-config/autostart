@@ -24,6 +24,11 @@ hsetroot -solid "#000000" &
 # Start pulseaudio server
 pulseaudio --start
 
+# Start picom compositor (if installed)
+if dpkg -s picom > /dev/null 2>&1; then
+    picom &
+fi
+
 # Start your presentation
 /bin/bash /assets/presentation/start-presentation.sh &
 
