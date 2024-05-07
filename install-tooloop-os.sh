@@ -183,6 +183,11 @@ EOF
 systemctl disable systemd-networkd-wait-online.service
 systemctl mask systemd-networkd-wait-online.service
 
+# Disable unattended upgrades
+systemctl stop unattended-upgrades.service
+systemctl disable unattended-upgrades.service
+systemctl mask unattended-upgrades.service
+
 # Copy bash config
 cp "$SCRIPT_PATH"/files/bashrc /home/tooloop/.bashrc
 chown tooloop:tooloop /home/tooloop/.bashrc
