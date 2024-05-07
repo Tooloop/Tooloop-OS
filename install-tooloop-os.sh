@@ -261,10 +261,10 @@ WantedBy=xsession.target
 EOF
 
 
-# Create a cronjob to take a screenshot every minute
+# Create a cronjob to take a screenshot every minute (but disable it by default)
 # and one to clean up screenshots every day at 00:00
 if ! crontab -u tooloop -l | grep -q tooloop-screenshot; then
-  (crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
+  (crontab -u tooloop -l ; echo "# * * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
   (crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
 fi
 
