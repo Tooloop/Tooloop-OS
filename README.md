@@ -14,7 +14,7 @@ Tooloop OS is based on [Ubuntu Server 22.04 LTS](https://www.ubuntu.com/download
 
 Many ideas of Tooloop OS are based on [this article](http://openframeworks.cc/ofBook/chapters/installation_up_4evr_linux.html) in the openframeworks book on keeping a linux installation up forever. However Tooloop tries to take the aproach one step further. 
 
-Tooloop OS comes with a set of [management and maintenance tools](https://github.com/tooloop/Tooloop-Control) and a set of [default/example apps](https://github.com/tooloop/Tooloop-Packages). You can configure and control it over the network and get built-in health and confidence monitoring.
+Tooloop OS comes with a set of [management and maintenance tools](https://github.com/tooloop/Tooloop-Control) and a set of [basic apps](https://github.com/tooloop/Tooloop-Packages). You can configure and control it over the network and get built-in health and confidence monitoring.
 
 
 # Who should use it?
