@@ -22,6 +22,9 @@ if [ $EUID != 0 ]; then
     exit 1
 fi
 
+# Set restart mode to list only so the installations can run unattended
+sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'l';/" /etc/needrestart/needrestart.conf
+
 
 # ------------------------------------------------------------------------------
 # Update
@@ -47,7 +50,7 @@ echo "-------------------------------------------------------------------------"
 echo " "
 
 # Install base packages
-apt install -y --no-install-recommends \
+apt install -y \
   arandr \
   augeas-doc \
   augeas-lenses \
@@ -56,12 +59,15 @@ apt install -y --no-install-recommends \
   bash-completion \
   chromium-browser \
   curl \
+  dpkg-dev \
   gcc \
   git \
+  git-lfs \
   hsetroot \
   htop \
   libnss-mdns \
   make \
+  mousepad \
   nano \
   netatalk \
   obconf \
@@ -72,12 +78,15 @@ apt install -y --no-install-recommends \
   pulseaudio \
   scrot \
   ssh \
+  thunar \
+  tree \
   unclutter-startup \
   unclutter-xfixes \
   unzip \
   vainfo \
   x11-xserver-utils \
   x11vnc \
+  xdotool \
   xorg \
   xterm \
   zip
@@ -148,7 +157,7 @@ cat >/etc/issue.net <<EOF
      |     |       | |       | |     |       | |       | |       |
       \___  \____ /   \____ /   \___  \____ /   \____ /  |  ____/
                                                          |
-                              based on Ubuntu 22.04 LTS  |
+                              based on Ubuntu 24.04 LTS  |
 
 
 Hint: There's a bunch of convenient aliases starting with tooloop-...
@@ -174,6 +183,11 @@ EOF
 systemctl disable systemd-networkd-wait-online.service
 systemctl mask systemd-networkd-wait-online.service
 
+# Disable unattended upgrades
+systemctl stop unattended-upgrades.service
+systemctl disable unattended-upgrades.service
+systemctl mask unattended-upgrades.service
+
 # Copy bash config
 cp "$SCRIPT_PATH"/files/bashrc /home/tooloop/.bashrc
 chown tooloop:tooloop /home/tooloop/.bashrc
@@ -189,10 +203,6 @@ cp -R "$SCRIPT_PATH"/files/openbox-config/* /home/tooloop/.config/openbox/
 # Copy Openbox menu icons
 mkdir -p /home/tooloop/.config/openbox-menu-icons
 cp -R "$SCRIPT_PATH"/files/openbox-menu-icons/* /home/tooloop/.config/openbox-menu-icons/
-
-# Copy start- and stop-presentation scripts
-cp "$SCRIPT_PATH"/files/start-presentation.sh /assets/presentation/
-cp "$SCRIPT_PATH"/files/stop-presentation.sh /assets/presentation/
 
 # Copy Clear Sans font
 cp -R "$SCRIPT_PATH"/include/clearsans /usr/share/fonts/truetype
@@ -255,11 +265,14 @@ SuccessExitStatus=3
 WantedBy=xsession.target
 EOF
 
-# Create a cronjob to take a screenshot every minute
-(crontab -u tooloop -l ; echo "* * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
 
-# Create a cronjob to clean up screenshots every day at 00:00
-(crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
+# Create a cronjob to take a screenshot every minute (but disable it by default)
+# and one to clean up screenshots every day at 00:00
+if ! crontab -u tooloop -l | grep -q tooloop-screenshot; then
+  (crontab -u tooloop -l ; echo "# * * * * * env DISPLAY=:0.0 /opt/tooloop/scripts/tooloop-screenshot") | crontab -u tooloop -
+  (crontab -u tooloop -l ; echo "0 0 * * * /opt/tooloop/scripts/tooloop-screenshots-clean") | crontab -u tooloop -
+fi
+
 
 # make Enttec USB DMX devices accessable to the tooloop user
 usermod -aG tty tooloop
@@ -281,7 +294,9 @@ Description: Local repository for Tooloop presentations and addons
 EOF
 
 # Add to apt source list
-echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+if ! grep -q file:/assets/packages /etc/apt/sources.list; then
+  echo "deb [allow-insecure=yes] file:/assets/packages ./" | tee -a /etc/apt/sources.list
+fi
 
 # Stop apt from removing empty folders when uninstalling stuff
 touch /assets/data/.keep
@@ -295,6 +310,9 @@ git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-
 cd /home/tooloop/Tooloop-Packages
 ./build.sh
 ./deploy.sh
+
+# Install Onboarding App
+apt install -y --allow-unauthenticated tooloop-onboarding
 
 # Chown things to the tooloop user
 chown -R tooloop:tooloop /assets/
@@ -318,7 +336,6 @@ path = /assets
 EOF
 
 # Publish services over Avahi/Bonjour
-
 cp /usr/share/doc/avahi-daemon/examples/sftp-ssh.service /etc/avahi/services
 cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services
 
@@ -333,6 +350,12 @@ cat > /etc/avahi/services/vnc.service <<EOF
  </service>
 </service-group>
 EOF
+
+# Enable wake on lan for all ethernet interfaces
+for i in $(ls /sys/class/net/ | grep en)
+do
+    netplan set network.ethernets.$i.wakeonlan=true
+done
 
 
 echo " "

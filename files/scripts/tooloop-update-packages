@@ -6,10 +6,17 @@
 cd /assets/packages
 
 # Generate the Packages file
+echo "-------------------------------------------------------------------------"
+echo "Generating Packages file"
+echo ""
+
 dpkg-scanpackages . /dev/null > Packages
 gzip --keep --force -9 Packages
 
 # Generate the Release file
+echo "-------------------------------------------------------------------------"
+echo "Generating Release file"
+echo ""
 cat conf/distributions > Release
 
 # The Date: field has the same format as the Debian package changelog entries,
@@ -32,7 +39,13 @@ printf '\n '$(sha256sum Packages | cut --delimiter=' ' --fields=1)' %16d Package
 # gpg -abs --digest-algo SHA512 --local-user $USER -o Release.gpg Release
 
 # Get apt to see the changes
+echo "-------------------------------------------------------------------------"
+echo "Updating apt"
+echo ""
 sudo apt update
 
 # List the packages
-apt list tooloop*
+echo "-------------------------------------------------------------------------"
+echo "Done. These packages are available now:"
+echo ""
+apt list "tooloop*"

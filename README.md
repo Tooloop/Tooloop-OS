@@ -1,20 +1,17 @@
 # Tooloop OS
 
-![](https://img.shields.io/badge/status-kinda%20works-blue)
 ![](https://img.shields.io/github/license/Tooloop/Tooloop-OS)
 [![Matrix](https://img.shields.io/matrix/tooloop-os:matrix.org?label=Chat&logo=matrix)](https://app.element.io/#/room/#tooloop-os:matrix.org)
 
-![tooloop-logo](https://user-images.githubusercontent.com/4962676/169491947-b66f02e3-7a0b-4df1-9ac8-969760c730c0.png)
-
 # About
 
-[Tooloop OS](http://tooloop.org) is a platform for media artists to safely and easily develop and deploy multimedia installations.
+[Tooloop OS](https://www.tooloop-os.org) is a platform for media artists to safely and easily develop and deploy multimedia installations.
 
-Tooloop OS is based on [Ubuntu Server 22.04 LTS](https://www.ubuntu.com/download/server) and the super lightweight window manager [Openbox](http://openbox.org). Both are customized to fit the needs of live and public multimedia installations.
+Tooloop OS is based on [Ubuntu Server 24.04 LTS](https://www.ubuntu.com/download/server) and the super lightweight window manager [Openbox](https://en.wikipedia.org/wiki/Openbox). Both are customized to fit the needs of live and public multimedia installations.
 
 Many ideas of Tooloop OS are based on [this article](http://openframeworks.cc/ofBook/chapters/installation_up_4evr_linux.html) in the openframeworks book on keeping a linux installation up forever. However Tooloop tries to take the aproach one step further. 
 
-Tooloop OS comes with a set of [management and maintenance tools](https://github.com/tooloop/Tooloop-Control) and a set of [basic apps](https://github.com/tooloop/Tooloop-Packages). You can configure and control it over the network and get built-in health and confidence monitoring.
+Tooloop OS comes with a set of [management and maintenance tools](https://github.com/tooloop/Tooloop-Control) and a set of [bundled apps](https://github.com/tooloop/Tooloop-Packages). You can configure and control it over the network and get built-in health and confidence monitoring.
 
 
 # Who should use it?
@@ -33,9 +30,9 @@ If you have written an application using one of these, Tooloop might just be wha
 
 # Status
 
-The system is stable and usable. In fact I am using it exclusivly for all my clients projects for years and you are warmly invited to give it a go and contribute.
+The system is stable and usable. We are using it exclusivly for all our clients projects for years and you are warmly invited to give it a go and contribute.
 
-Please check out [the project website](http://tooloop.org) if you want to learn more. The [manual](http://tooloop.org/Manual) and [developer docs](http://tooloop.org/Development) are a little outdated and incomplete, though.
+Please check out [the project documentation](https://www.tooloop-os.org) if you want to learn more.
 
 
 # Get involved
@@ -48,17 +45,21 @@ You're also very welcome in the [Tooloop OS Matrix chat room](https://app.elemen
 
 # Installation
 
-1. Download and install [Ubuntu Server 22.04 LTS](https://ubuntu.com/download/server)
+1. Download and install [Ubuntu Server 24.04 LTS](https://ubuntu.com/download/server)
 2. Name the user `tooloop`
 3. SSH into your machine
     ```bash
     ssh tooloop@<IP_ADDRESS>
     ```
-4. Clone the repo  
+4. Install [Git LFS](https://git-lfs.com/)
+    ```
+    sudo apt install git-lfs
+    ```
+5. Clone the repo  
     ```bash
     git clone https://github.com/Tooloop/Tooloop-OS
     ```
-5. Run the install script
+6. Run the install script
     ```bash
     cd Tooloop-OS
     sudo ./install-tooloop-os.sh
