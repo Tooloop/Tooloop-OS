@@ -213,7 +213,7 @@ cp -R "$SCRIPT_PATH"/files/scripts /opt/tooloop
 chmod +x /opt/tooloop/scripts/*
 
 # Get control center
-git clone --branch dev https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
+git clone https://github.com/tooloop/Tooloop-Control.git /opt/tooloop/control-center
 
 # Install dependencies
 /bin/bash /opt/tooloop/control-center/install.sh
@@ -306,7 +306,7 @@ touch /opt/tooloop/control-center/installed_app/.keep
 # Get bundled packages
 # TODO: download release from github
 # https://github.com/Tooloop/Tooloop-Packages/issues/2
-git clone --branch dev https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
+git clone https://github.com/Tooloop/Tooloop-Packages.git /home/tooloop/Tooloop-Packages
 cd /home/tooloop/Tooloop-Packages
 ./build.sh
 ./deploy.sh
