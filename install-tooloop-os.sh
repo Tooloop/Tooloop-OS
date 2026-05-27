@@ -278,7 +278,7 @@ fi
 usermod -aG tty tooloop
 usermod -aG dialout tooloop
 cat > /etc/udev/rules.d/75-permissions-enttec.rules <<EOF
-SUBSYSTEM=="usb", ACTION=="add|change", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", "MODE="0666"
+SUBSYSTEM=="usb", ACTION=="add|change", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0666"
 EOF
 
 # Create local deb repository
